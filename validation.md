@@ -37,3 +37,14 @@
 - Node.js 24.19.0；上述安装使用隔离 Pi 配置和 Skills 状态目录。
 
 结构化证据：[install-local.json](validation/install-local.json)。
+
+## GitHub 远端安装验证
+
+公开仓库：<https://github.com/Varybai/general-data-parser-package>。
+
+- 在新的隔离项目执行 pi install git:github.com/Varybai/general-data-parser-package --local --approve：安装成功；Pi 1.0.4 资源加载器发现 1 个目标 Skill，零相关诊断，进入提示清单。
+- 执行 npx --yes skills add Varybai/general-data-parser-package --skill general-data-parser --agent pi --copy --yes：Skills CLI 1.7.1 安装成功；Pi 同样能够发现安装结果。
+- 两种安装结果各有 10 个 Skill 文件，均与源文件逐字节一致；各自安装目录中的验收器均成功检查 JSON 样本。
+- 首次发布提交 e4c7360 的 GitHub Actions 已通过包结构、25 项回归、三个样本转换和 npm 文件清单检查。
+
+结构化证据：[install-remote.json](validation/install-remote.json)。安装验收覆盖该记录中的源提交与 Skill 内容哈希；本次后续提交仅增加验收记录。

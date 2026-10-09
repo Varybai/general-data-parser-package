@@ -1,0 +1,59 @@
+{
+  "repo": "https://github.com/Varybai/general-data-parser-package",
+  "visibility": "public",
+  "pi_version": "1.0.4",
+  "loaders": [
+    {
+      "project": "pi-remote",
+      "skill": "general-data-parser",
+      "file": ".pi/git/github.com/Varybai/general-data-parser-package/skills/general-data-parser/SKILL.md",
+      "diagnostics": [],
+      "advertisedInPrompt": true
+    },
+    {
+      "project": "skills-remote",
+      "skill": "general-data-parser",
+      "file": ".agents/skills/general-data-parser/SKILL.md",
+      "diagnostics": [],
+      "advertisedInPrompt": true
+    }
+  ],
+  "installations": {
+    "pi_install": {
+      "status": "pass",
+      "files_byte_identical": 10,
+      "verifier": {
+        "structural_validation": "pass",
+        "recorded_required_checks_passed": true,
+        "declared_state": "local_ready",
+        "object_id": "sample-json",
+        "version": "v1",
+        "files_verified": 9,
+        "profile": "fixture.json.v1",
+        "semantic_validation": "not_performed_by_this_verifier"
+      }
+    },
+    "npx_skills_add": {
+      "status": "pass",
+      "files_byte_identical": 10,
+      "verifier": {
+        "structural_validation": "pass",
+        "recorded_required_checks_passed": true,
+        "declared_state": "local_ready",
+        "object_id": "sample-json",
+        "version": "v1",
+        "files_verified": 9,
+        "profile": "fixture.json.v1",
+        "semantic_validation": "not_performed_by_this_verifier"
+      }
+    }
+  },
+  "skills_cli_version": "1.7.1",
+  "installed_source_commit": "e4c7360e07107a966b821fa3b962d3ec422c080f",
+  "skill_content_sha256": "7c7f96f7ef04733a304f2a55c7541bcd4ce5fa668eb8350ef302c89eba8a098b",
+  "ci": {
+    "source_commit": "e4c7360e07107a966b821fa3b962d3ec422c080f",
+    "conclusion": "success",
+    "url": "https://github.com/Varybai/general-data-parser-package/actions/runs/37888820294"
+  }
+}
