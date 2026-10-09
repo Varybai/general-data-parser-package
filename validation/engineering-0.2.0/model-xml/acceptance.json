@@ -1,0 +1,74 @@
+{
+  "checks": [
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "content.fidelity",
+      "method": "Run format value checks; preserve full declared representation and source locators",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "content.coverage",
+      "method": "Consume full source within declared adapter scope; never silently truncate on limits",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "document.consistency",
+      "method": "Generate facts and asset from the same metrics; readback verified before commit",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.replay",
+      "method": "Reparse immutable source and compare full representation and metrics",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "format.structure",
+      "method": "Parse DTD-free XML with ordered children and namespace expansion",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.values",
+      "method": "Serialize/reparse and compare names, attributes, text, tail and children",
+      "reason": null,
+      "result": "pass"
+    }
+  ],
+  "limitations": [
+    "XML declaration and nodes outside the document element remain in source bytes only; no schema/DTD interpretation."
+  ],
+  "manifest_sha256": "98b4bfa1ed9296c5bc12f924013ce6a7eeb38e8926b21529e1b9960ecd0dcaf1",
+  "object_id": "model-f496355d",
+  "profile_sha256": "89ca0db98532822af2b28802e5e2661c840c4b3a38190027c1fc4c09f3049afc",
+  "schema_version": "general-parser.acceptance.v1",
+  "source_manifest_sha256": "c746940242dd5084877d743de7db450cac3c3f1709821cdfc26083116c03b8a6",
+  "state": "local_ready_with_limitations",
+  "version": "v1"
+}

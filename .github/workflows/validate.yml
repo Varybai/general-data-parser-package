@@ -22,6 +22,8 @@ jobs:
         run: npm test
       - name: Convert three local samples
         run: python3 -B scripts/smoke_formats.py --output "$RUNNER_TEMP/general-parser-smoke"
+      - name: Parse and replay engineering formats
+        run: python3 -B scripts/smoke_engineering.py --output "$RUNNER_TEMP/general-parser-engineering"
       - name: Check npm package contents
         run: |
           npm pack --dry-run --ignore-scripts --json > "$RUNNER_TEMP/general-parser-pack.json"

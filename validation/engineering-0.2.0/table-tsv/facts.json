@@ -1,0 +1,69 @@
+{
+  "claims": [
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.tsv"
+        }
+      ],
+      "id": "column_count",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": 2
+    },
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.tsv"
+        }
+      ],
+      "id": "physical_lines",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": 3
+    },
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.tsv"
+        }
+      ],
+      "id": "record_count",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": 2
+    }
+  ],
+  "diagnostics": [],
+  "extraction": {
+    "losses": [],
+    "receipt": "receipts/parse.json",
+    "status": "succeeded",
+    "tool": "general-data-parser.engineering",
+    "tool_version": "1"
+  },
+  "limitations": [],
+  "object_id": "table-8b103300",
+  "profile_sha256": "bc2e3e4cfde788b3701c05e4e67b53c1fe9f71b6b120990cc545f2005791a633",
+  "schema_version": "general-parser.facts.v1",
+  "source_manifest_sha256": "21ccc5803ec1710e3f46484c3a537cce7f2d8c89b6cb443c773e7db5ca927b43",
+  "version": "v1"
+}

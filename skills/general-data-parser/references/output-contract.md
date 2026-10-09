@@ -52,6 +52,14 @@ parse_owner=backend 时，required_checks 至少为 input.integrity、backend.ca
 
 本地解析模式就绪不等待发布门槛；只有声明 published 时，才要求两组检查均通过。发布检查可以暂不记录或记录为未执行，不能因此阻止合格的本地解析。旧 profile 将 remote 检查放在 required_checks 时仍按其旧约束执行。
 
+## 可执行工程产物
+
+parse_file.py 在本地契约中增加 data/parsed.json（evidence 角色）与 receipts/parse.json、receipts/checks.json。data 采用 general-parser.data.v1，保存格式相关的完整结构和指标；大型数据不必复制进每条 facts。行/节点/面等定位在完整表示中，汇总指标关联全源范围和算法。
+
+profile.adapter 记录实际适配器版本、Python 版本、代码哈希、声明范围和所有选项。缺单位、未解释材质、未观察等按任务必要性判定；不能把未知写成 0 或任意默认值。
+
+verify_engineering 要求当前代码哈希与 profile 一致。规则变化后重新解析/验收并使用新版本目录。JSON 数字采用原始词法字符串加 numeric_tokens 类型映射，保留精度和数字/字符串区别；引用结果时必须同时读取映射。
+
 ## facts
 
 `schema_version=general-parser.facts.v1`。含 object_id、version、profile_sha256、source_manifest_sha256、extraction、claims、diagnostics、limitations。

@@ -1,0 +1,23 @@
+{
+  "error": null,
+  "format": "stl",
+  "options": {
+    "abs_tolerance": 1e-09,
+    "encoding": "utf-8-sig",
+    "header": true,
+    "length_unit": "m",
+    "max_bytes": 33554432,
+    "max_items": 100000,
+    "rel_tolerance": 1e-12,
+    "require_observation": false,
+    "require_unit": false,
+    "time_column": null,
+    "time_order": "strict",
+    "time_unit": null
+  },
+  "scope": "ASCII or binary triangle surface geometry; no manufacturing claim",
+  "source_sha256": "d766ec79b7b59fd5519f1747dc456f32c2c625d656ad993fc28ef6f7e785634a",
+  "status": "succeeded",
+  "tool": "general-data-parser.engineering",
+  "version": "1"
+}

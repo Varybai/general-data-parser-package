@@ -1,0 +1,47 @@
+{
+  "data": {
+    "numeric_representation": "lexical strings plus numeric_tokens type map",
+    "records": [
+      {
+        "numeric_tokens": [
+          {
+            "lexeme": "1",
+            "pointer": "/x",
+            "type": "integer"
+          }
+        ],
+        "source_lines": [
+          1,
+          1
+        ],
+        "value": {
+          "x": "1"
+        }
+      },
+      {
+        "numeric_tokens": [
+          {
+            "lexeme": "2",
+            "pointer": "/x",
+            "type": "integer"
+          }
+        ],
+        "source_lines": [
+          3,
+          3
+        ],
+        "value": {
+          "x": "2"
+        }
+      }
+    ]
+  },
+  "format": "jsonl",
+  "metrics": {
+    "blank_lines": 1,
+    "node_count": 4,
+    "numeric_token_count": 2,
+    "record_count": 2
+  },
+  "schema_version": "general-parser.data.v1"
+}

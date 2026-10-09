@@ -1,0 +1,40 @@
+{
+  "data": {
+    "columns": [
+      "id",
+      "value"
+    ],
+    "header_present": true,
+    "rows": [
+      {
+        "index": 0,
+        "source_lines": [
+          2,
+          2
+        ],
+        "values": [
+          "a",
+          "0"
+        ]
+      },
+      {
+        "index": 1,
+        "source_lines": [
+          3,
+          3
+        ],
+        "values": [
+          "b",
+          "2"
+        ]
+      }
+    ]
+  },
+  "format": "tsv",
+  "metrics": {
+    "column_count": 2,
+    "physical_lines": 3,
+    "record_count": 2
+  },
+  "schema_version": "general-parser.data.v1"
+}

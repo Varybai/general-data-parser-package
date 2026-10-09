@@ -2,7 +2,32 @@
 
 一个仓库同时提供 **Pi coding agent package** 和标准 **Agent Skill**。两种安装方式使用同一份 `skills/general-data-parser/`。
 
-将异构数据解析组织为：确认后端能力、选择解析归属、保留原文件、执行现有解析路径、核验内容与证据。目标后端已支持的 PDF/Office 等直接提交原文件；额外适配只处理明确缺口或独立交付需求。
+0.2.0 增加可执行的工程数据解析器及源重放验收。统一验收标准约束所有格式；适配器负责实际代码解析和专项检查。OV 已满足任务的文档解析能力继续复用。
+
+## 0.2.0 可执行工程解析
+
+首批内置 CSV/TSV（含可选时序）、JSON/JSONL、XML、STL（ASCII/二进制）和 OBJ 的明确子集，使用 Python 3.10+ 标准库。它们实际生成完整结构、源定位、指标、事实、说明和回执，并执行专项检查。
+
+从 Skill 目录运行，或使用安装后的脚本完整路径：
+
+~~~bash
+python3 scripts/parse_file.py --list-formats
+python3 scripts/parse_file.py ./signals.csv --time-column time --time-unit ms --output ./out/signals-v1
+python3 scripts/parse_file.py ./part.stl --length-unit mm --require-unit --output ./out/part-v1
+python3 scripts/verify_engineering.py ./out/part-v1 --require-ready
+~~~
+
+| 交付 | 作用 |
+|---|---|
+| source/ | 原始输入字节 |
+| data/parsed.json | 完整结构化表示与来源定位 |
+| facts.json / asset.md | 指标、事实与可读说明 |
+| observations.json | 真实观察状态；代码不假填 reviewed |
+| profile / manifest / receipts / acceptance | 规则、哈希、实际执行与验收结果 |
+
+JSON 数字保留词法及类型映射，避免浮点精度损失。网格单位不猜测，时序起点/时区不假定。坏行、未知几何和资源上限不能静默丢弃。
+
+统一标准见 [E01–E09](skills/general-data-parser/references/engineering-acceptance.md)；新增格式见 [代码适配接口](skills/general-data-parser/references/adapter-development.md)。STEP/IGES/DXF/IFC、HDF5/NetCDF/VTK 尚未内置，须实现并通过样本验收后才声明支持。
 
 ## 安装到 Pi
 
@@ -69,7 +94,7 @@ npx skills add Varybai/general-data-parser-package --list
 
 parse_owner=backend 时，原文件直接由 OV 等已配置的后端解析；Agent 记录输入哈希、路由、任务、资源 URI 和回读验收。无需先生成本地 facts/observations/asset。
 
-parse_owner=local 时，才按本地契约生成 facts、observations、asset，附源证据与回执。OV 目标下需记录本地处理的明确原因。
+需要工程结构化数据和数值/网格/时序检查时，使用代码适配器并按本地契约生成产物；已有后端结果满足需求时可复用。OV 目标下记录所需工程能力与处理原因。
 
 | 摘要归属 | L0/L1 的生成者 |
 |---|---|
@@ -79,9 +104,9 @@ parse_owner=local 时，才按本地契约生成 facts、observations、asset，
 
 OV 模式不预写或覆盖 .abstract.md/.overview.md。后端直入的输入通过检查后标为 ready_to_submit，解析与回读完成才 published。独立本地解析则保留 local_ready 阶段。保留源声明、计算事实、感知观察和推断的区别。
 
-Skill 提供操作方法和 Python 3.10+ 标准库只读验收器。实际解析依赖 Agent 环境中的格式库、应用或模型；安装本包不会安装这些后端、模型凭据或知识库服务。格式示例不是已测试支持矩阵。
+Skill 现在包含标准库可执行适配器、产物完整性验收器和实际源重放检查器。更广的格式仍需真实库/API 实现；本包不自动安装 CAD 内核、科学数据依赖、模型或知识库服务。
 
-验收器检查文件、哈希、版本绑定、正文关系与报告门槛。关键字段、覆盖和感知内容需要真实核对；结构检查通过不等于语义准确。
+verify_bundle 检查契约与字节；verify_engineering 实际重读源并比较完整表示、事实、说明和专项条件。重放不是独立算法正确性证明，需配合已知答案测试；感知、制造和物理性能仍需要相应验证。
 
 ## 维护与验证
 
@@ -90,10 +115,11 @@ Skill 提供操作方法和 Python 3.10+ 标准库只读验收器。实际解析
 ```bash
 npm test
 python3 -B scripts/smoke_formats.py --output /path/to/new-isolated-output
+python3 -B scripts/smoke_engineering.py --output /path/to/new-engineering-output
 npm pack --dry-run --ignore-scripts
 npm run pack:skill
 ```
 
-`npm pack` 只包含共享 Skill、README 和 package manifest。测试、样本及维护脚本保留在 Git 仓库，不成为 npm 运行依赖。GitHub Actions 验证包结构、验收器回归、小样本转换与 npm 文件清单。
+`npm pack` 只包含共享 Skill、README 和 package manifest。测试、样本及维护脚本保留在 Git 仓库，不成为 npm 运行依赖。GitHub Actions 验证包结构、回归、原有小样本、八个工程输入的真实解析与重放，以及 npm 文件清单。
 
-[验证记录](https://github.com/Varybai/general-data-parser-package/blob/main/validation.md)区分历史安装/样本验证、0.1.1 的摘要归属修复与 0.1.2 的 45 项回归。基础转换样本为 CSV、JSON、Markdown；其他格式按实际后端验证。
+[验证记录](https://github.com/Varybai/general-data-parser-package/blob/main/validation.md)区分历史流程/安装验证与 0.2.0 可执行适配器的实际测试范围。新格式列表以已执行测试和声明子集为准。

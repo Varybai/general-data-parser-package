@@ -1,0 +1,72 @@
+{
+  "checks": [
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "content.fidelity",
+      "method": "Run format value checks; preserve full declared representation and source locators",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "content.coverage",
+      "method": "Consume full source within declared adapter scope; never silently truncate on limits",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "document.consistency",
+      "method": "Generate facts and asset from the same metrics; readback verified before commit",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.replay",
+      "method": "Reparse immutable source and compare full representation and metrics",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "format.structure",
+      "method": "Validate rectangular rows and unique nonempty column names",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.values",
+      "method": "CSV writer/reader roundtrip preserves every string cell, including empty and zero",
+      "reason": null,
+      "result": "pass"
+    }
+  ],
+  "limitations": [],
+  "manifest_sha256": "6a570ed21342b17c8f46bed62f28b35d79a03f232e000b2ea9dc9742ebb52c8a",
+  "object_id": "table-8b103300",
+  "profile_sha256": "bc2e3e4cfde788b3701c05e4e67b53c1fe9f71b6b120990cc545f2005791a633",
+  "schema_version": "general-parser.acceptance.v1",
+  "source_manifest_sha256": "21ccc5803ec1710e3f46484c3a537cce7f2d8c89b6cb443c773e7db5ca927b43",
+  "state": "local_ready",
+  "version": "v1"
+}

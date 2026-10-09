@@ -1,0 +1,90 @@
+{
+  "data": {
+    "coordinate_system": "source axes, no transform",
+    "faces": [
+      {
+        "attribute_word": 0,
+        "declared_normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "locator": {
+          "byte_offset": 84,
+          "facet": 0
+        },
+        "vertices": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "length_unit": "m",
+    "metadata": {
+      "encoding": "binary",
+      "header_hex": "736f6c69642062696e6172790000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "unit_basis": "caller declaration",
+    "vertices": [
+      {
+        "locator": {
+          "byte_offset": 96,
+          "facet": 0
+        },
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "locator": {
+          "byte_offset": 108,
+          "facet": 0
+        },
+        "position": [
+          2.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "locator": {
+          "byte_offset": 120,
+          "facet": 0
+        },
+        "position": [
+          0.0,
+          3.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "format": "stl",
+  "metrics": {
+    "bbox": {
+      "extent": [
+        2.0,
+        3.0,
+        0.0
+      ],
+      "max": [
+        2.0,
+        3.0,
+        0.0
+      ],
+      "method": "extrema of parsed vertices; binary64 arithmetic",
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "unit": "m"
+    },
+    "face_count": 1,
+    "vertex_count": 3
+  },
+  "schema_version": "general-parser.data.v1"
+}

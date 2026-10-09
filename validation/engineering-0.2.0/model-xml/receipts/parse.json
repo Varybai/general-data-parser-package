@@ -1,0 +1,23 @@
+{
+  "error": null,
+  "format": "xml",
+  "options": {
+    "abs_tolerance": 1e-09,
+    "encoding": "utf-8-sig",
+    "header": true,
+    "length_unit": null,
+    "max_bytes": 33554432,
+    "max_items": 100000,
+    "rel_tolerance": 1e-12,
+    "require_observation": false,
+    "require_unit": false,
+    "time_column": null,
+    "time_order": "strict",
+    "time_unit": null
+  },
+  "scope": "DTD-free XML document-element tree, namespaces, attributes, text/tail and ordered children",
+  "source_sha256": "f496355d90ba8f936e7a2efbe8c0513fb150ffb479a1653a23e94390c067fff9",
+  "status": "succeeded",
+  "tool": "general-data-parser.engineering",
+  "version": "1"
+}

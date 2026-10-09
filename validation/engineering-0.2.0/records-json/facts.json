@@ -1,0 +1,86 @@
+{
+  "claims": [
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.json"
+        }
+      ],
+      "id": "blank_lines",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": 0
+    },
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.json"
+        }
+      ],
+      "id": "node_count",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": 4
+    },
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.json"
+        }
+      ],
+      "id": "numeric_token_count",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": 2
+    },
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.json"
+        }
+      ],
+      "id": "record_count",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": 1
+    }
+  ],
+  "diagnostics": [],
+  "extraction": {
+    "losses": [],
+    "receipt": "receipts/parse.json",
+    "status": "succeeded",
+    "tool": "general-data-parser.engineering",
+    "tool_version": "1"
+  },
+  "limitations": [],
+  "object_id": "records-72e3a354",
+  "profile_sha256": "1daf81953784130be706eee593bb58154b5053d85ee37352d51546496893518f",
+  "schema_version": "general-parser.facts.v1",
+  "source_manifest_sha256": "d9b98643510512cd69f9b80d34c9d5125fc8d745d1866515df0fb3b2603da53f",
+  "version": "v1"
+}

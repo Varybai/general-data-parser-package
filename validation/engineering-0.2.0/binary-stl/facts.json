@@ -1,0 +1,104 @@
+{
+  "claims": [
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.stl"
+        }
+      ],
+      "id": "bbox",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": {
+        "extent": [
+          2.0,
+          3.0,
+          0.0
+        ],
+        "max": [
+          2.0,
+          3.0,
+          0.0
+        ],
+        "method": "extrema of parsed vertices; binary64 arithmetic",
+        "min": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "unit": "m"
+      }
+    },
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.stl"
+        }
+      ],
+      "id": "face_count",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": 1
+    },
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.stl"
+        }
+      ],
+      "id": "vertex_count",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": 3
+    },
+    {
+      "basis": [
+        {
+          "locator": {
+            "field": "options.length_unit"
+          },
+          "method": "caller declaration; not inferred from STL/OBJ",
+          "path": "receipts/parse.json"
+        }
+      ],
+      "id": "length_unit",
+      "kind": "source_declared",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": "m"
+    }
+  ],
+  "diagnostics": [],
+  "extraction": {
+    "losses": [],
+    "receipt": "receipts/parse.json",
+    "status": "succeeded",
+    "tool": "general-data-parser.engineering",
+    "tool_version": "1"
+  },
+  "limitations": [],
+  "object_id": "binary-d766ec79",
+  "profile_sha256": "93b5d7e6522949a5307fc82d8eafe97cba0f87390c34a4c4839194551a47cf9a",
+  "schema_version": "general-parser.facts.v1",
+  "source_manifest_sha256": "9c4f54a354f47363bd8f3b9c8f27d4d281e576290571912d35884885f352fcf6",
+  "version": "v1"
+}

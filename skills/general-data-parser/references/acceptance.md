@@ -1,5 +1,7 @@
 # 解析后文件验收标准
 
+工程数据的统一最低门槛为 [E01–E09](engineering-acceptance.md)。不论本地适配器还是后端解析，都要按这些标准说明证据与缺口；格式专项不能替代通用门槛。
+
 ## 按解析归属执行
 
 后端模式提交前只验证 input.integrity（实际源字节、对象与版本）和 backend.capability（当前服务路由、依赖与任务支持范围），不要求本地解析文档。ready_to_submit 只表示可以提交。
@@ -46,7 +48,7 @@
 python3 scripts/verify_bundle.py /path/to/bundle --require-ready
 ```
 
-省略 --require-ready 可检查 prepared 或 ready_to_submit 的输入包；后端模式带该参数时必须达到 published。输出分别记录 structural_validation 和 recorded_required_checks_passed。脚本不证明回执动作真实发生，也不自行判定语义准确性。无 Python 时执行等价检查并记录实际方法，不声称运行了脚本。
+省略 --require-ready 可检查 prepared 或 ready_to_submit 的输入包；后端模式带该参数时必须达到 published。输出分别记录 structural_validation 和 recorded_required_checks_passed。verify_bundle 脚本不证明回执动作真实发生。内置工程代码产物还必须执行 verify_engineering，从源重放并核对实际结构/数值；物理真实性或感知内容仍需相应证据。无 Python 时执行等价检查并记录实际方法，不声称运行了脚本。
 
 ## 应覆盖的失败案例
 

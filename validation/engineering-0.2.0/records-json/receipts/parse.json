@@ -1,0 +1,23 @@
+{
+  "error": null,
+  "format": "json",
+  "options": {
+    "abs_tolerance": 1e-09,
+    "encoding": "utf-8-sig",
+    "header": true,
+    "length_unit": null,
+    "max_bytes": 33554432,
+    "max_items": 100000,
+    "rel_tolerance": 1e-12,
+    "require_observation": false,
+    "require_unit": false,
+    "time_column": null,
+    "time_order": "strict",
+    "time_unit": null
+  },
+  "scope": "Strict JSON with preserved numeric lexemes, types and pointers",
+  "source_sha256": "72e3a35489e61a4ace36452dc9909954263492282dcc8aa04055e1d8b6056856",
+  "status": "succeeded",
+  "tool": "general-data-parser.engineering",
+  "version": "1"
+}

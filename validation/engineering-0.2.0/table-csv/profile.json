@@ -1,0 +1,47 @@
+{
+  "adapter": {
+    "implementation_sha256": "0de205694bdea87ddcd5a381c2e905b186ef9718715c4abc089d4101a761a819",
+    "options": {
+      "abs_tolerance": 1e-09,
+      "encoding": "utf-8-sig",
+      "header": true,
+      "length_unit": null,
+      "max_bytes": 33554432,
+      "max_items": 100000,
+      "rel_tolerance": 1e-12,
+      "require_observation": false,
+      "require_unit": false,
+      "time_column": "time",
+      "time_order": "strict",
+      "time_unit": "ms"
+    },
+    "original_filename": "table.csv",
+    "python_version": "3.14.7",
+    "scope": "Rectangular text table, explicit header policy; optional time-series checks",
+    "source_name": "source/input.csv",
+    "tool": "general-data-parser.engineering",
+    "version": "1"
+  },
+  "format": "csv",
+  "id": "engineering.csv.v1",
+  "observation_policy": "not_applicable",
+  "output_language": "en",
+  "parse_owner": "local",
+  "publication_checks": [],
+  "required_checks": [
+    "content.fidelity",
+    "content.coverage",
+    "document.consistency",
+    "engineering.replay",
+    "format.structure",
+    "engineering.values",
+    "engineering.time"
+  ],
+  "roles": {
+    "asset": "asset.md",
+    "facts": "facts.json",
+    "observations": "observations.json"
+  },
+  "schema_version": "general-parser.profile.v1",
+  "summary_owner": "none"
+}

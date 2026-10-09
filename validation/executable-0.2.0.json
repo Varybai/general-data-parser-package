@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "regression_tests_passed": 77,
+  "engineering_samples_passed": 8,
+  "formats": 7,
+  "skill_payload_files": 16,
+  "npm_payload_files": 18,
+  "zip_sha256": "c21437d7f2d56fa419532c91007305957ae9c6ff13f283d50beb0c861b78f253",
+  "isolated_parse_state": "local_ready",
+  "isolated_verification": {
+    "structural_validation": "pass",
+    "recorded_required_checks_passed": true,
+    "declared_state": "local_ready",
+    "object_id": "ascii-9ac3ea4a",
+    "version": "v1",
+    "files_verified": 8,
+    "profile": "engineering.stl.v1",
+    "summary_owner": "none",
+    "parse_owner": "local",
+    "semantic_validation": "declared structural/numeric scope checked; no real-world/perceptual validation",
+    "source_replay_validation": "pass",
+    "format_checks": [
+      "format.structure",
+      "engineering.geometry",
+      "engineering.units",
+      "engineering.values"
+    ]
+  },
+  "model_calls": 0,
+  "backend_calls": 0,
+  "scope": "stdlib engineering adapters and declared invariants; no physical-performance validation"
+}

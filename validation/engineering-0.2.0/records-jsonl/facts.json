@@ -1,0 +1,86 @@
+{
+  "claims": [
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.jsonl"
+        }
+      ],
+      "id": "blank_lines",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": 1
+    },
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.jsonl"
+        }
+      ],
+      "id": "node_count",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": 4
+    },
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.jsonl"
+        }
+      ],
+      "id": "numeric_token_count",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": 2
+    },
+    {
+      "basis": [
+        {
+          "locator": {
+            "scope": "declared adapter scope, entire source"
+          },
+          "method": "general-data-parser.engineering/1; see data/parsed.json locators and receipts/parse.json",
+          "path": "source/input.jsonl"
+        }
+      ],
+      "id": "record_count",
+      "kind": "computed",
+      "reason": null,
+      "status": "known",
+      "unit": null,
+      "value": 2
+    }
+  ],
+  "diagnostics": [],
+  "extraction": {
+    "losses": [],
+    "receipt": "receipts/parse.json",
+    "status": "succeeded",
+    "tool": "general-data-parser.engineering",
+    "tool_version": "1"
+  },
+  "limitations": [],
+  "object_id": "records-bfa6721f",
+  "profile_sha256": "ce60f98becaa9ea2cee49e584c16add8d881a44021ceb45807a370f9e4fa6c64",
+  "schema_version": "general-parser.facts.v1",
+  "source_manifest_sha256": "3d8c7d820e6bcd80b2da6f6fff951325a0a959050cb0dd567c6ff70d64cc64de",
+  "version": "v1"
+}

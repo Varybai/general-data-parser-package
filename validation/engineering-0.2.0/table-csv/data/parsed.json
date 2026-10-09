@@ -1,0 +1,61 @@
+{
+  "data": {
+    "columns": [
+      "time",
+      "value"
+    ],
+    "header_present": true,
+    "rows": [
+      {
+        "index": 0,
+        "source_lines": [
+          2,
+          2
+        ],
+        "values": [
+          "0",
+          "1.25"
+        ]
+      },
+      {
+        "index": 1,
+        "source_lines": [
+          3,
+          3
+        ],
+        "values": [
+          "1",
+          "0"
+        ]
+      },
+      {
+        "index": 2,
+        "source_lines": [
+          4,
+          4
+        ],
+        "values": [
+          "2",
+          "3.5"
+        ]
+      }
+    ],
+    "time": {
+      "basis": "relative numeric axis, epoch unspecified",
+      "column": "time",
+      "seconds": [
+        "0.000",
+        "0.001",
+        "0.002"
+      ]
+    }
+  },
+  "format": "csv",
+  "metrics": {
+    "column_count": 2,
+    "physical_lines": 4,
+    "record_count": 3,
+    "time_span_seconds": "0.002"
+  },
+  "schema_version": "general-parser.data.v1"
+}

@@ -1,0 +1,55 @@
+{
+  "files": [
+    {
+      "path": "asset.md",
+      "role": "asset",
+      "sha256": "ae1ca5734c9404a2f24786723d2b5d890393d9f08e56f6f0fd996824d2717f80",
+      "size_bytes": 549
+    },
+    {
+      "path": "data/parsed.json",
+      "role": "evidence",
+      "sha256": "0353b926a235809bd0b42309c90c54e1966b480e43b1cdca331218cef8c8131e",
+      "size_bytes": 818
+    },
+    {
+      "path": "facts.json",
+      "role": "facts",
+      "sha256": "e2be0192543083877fa1650a645e07246228694ee6f51ff4206afc0a435c7441",
+      "size_bytes": 2305
+    },
+    {
+      "path": "observations.json",
+      "role": "observations",
+      "sha256": "5f03bc7b77e934a6d6e8a8dd5b525e484219221c27fee8e7253f912f72ead55a",
+      "size_bytes": 514
+    },
+    {
+      "path": "profile.json",
+      "role": "profile",
+      "sha256": "1daf81953784130be706eee593bb58154b5053d85ee37352d51546496893518f",
+      "size_bytes": 1283
+    },
+    {
+      "path": "receipts/checks.json",
+      "role": "receipt",
+      "sha256": "ade6d9695fcc0ebee8db45c19930f160eca9a69fe38b7e104738826f4321fecd",
+      "size_bytes": 1526
+    },
+    {
+      "path": "receipts/parse.json",
+      "role": "receipt",
+      "sha256": "425456b2d4bb3e378514ace74f3b06d3d598381f2497164610272908c278ea77",
+      "size_bytes": 630
+    },
+    {
+      "path": "source/input.json",
+      "role": "source",
+      "sha256": "72e3a35489e61a4ace36452dc9909954263492282dcc8aa04055e1d8b6056856",
+      "size_bytes": 70
+    }
+  ],
+  "object_id": "records-72e3a354",
+  "schema_version": "general-parser.manifest.v1",
+  "version": "v1"
+}

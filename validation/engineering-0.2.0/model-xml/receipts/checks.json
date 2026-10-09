@@ -1,0 +1,54 @@
+{
+  "checks": [
+    {
+      "actual": null,
+      "executed": true,
+      "expected": null,
+      "id": "content.fidelity",
+      "method": "Run format value checks; preserve full declared representation and source locators",
+      "result": "pass"
+    },
+    {
+      "actual": null,
+      "executed": true,
+      "expected": null,
+      "id": "content.coverage",
+      "method": "Consume full source within declared adapter scope; never silently truncate on limits",
+      "result": "pass"
+    },
+    {
+      "actual": null,
+      "executed": true,
+      "expected": null,
+      "id": "document.consistency",
+      "method": "Generate facts and asset from the same metrics; readback verified before commit",
+      "result": "pass"
+    },
+    {
+      "actual": null,
+      "executed": true,
+      "expected": null,
+      "id": "engineering.replay",
+      "method": "Reparse immutable source and compare full representation and metrics",
+      "result": "pass"
+    },
+    {
+      "actual": null,
+      "executed": true,
+      "expected": null,
+      "id": "format.structure",
+      "method": "Parse DTD-free XML with ordered children and namespace expansion",
+      "result": "pass"
+    },
+    {
+      "actual": null,
+      "executed": true,
+      "expected": null,
+      "id": "engineering.values",
+      "method": "Serialize/reparse and compare names, attributes, text, tail and children",
+      "result": "pass"
+    }
+  ],
+  "coverage": "declared scope only",
+  "perception_executed": false
+}

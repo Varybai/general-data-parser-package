@@ -1,0 +1,92 @@
+{
+  "checks": [
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "content.fidelity",
+      "method": "Run format value checks; preserve full declared representation and source locators",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "content.coverage",
+      "method": "Consume full source within declared adapter scope; never silently truncate on limits",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "document.consistency",
+      "method": "Generate facts and asset from the same metrics; readback verified before commit",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.replay",
+      "method": "Reparse immutable source and compare full representation and metrics",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "format.structure",
+      "method": "Validate mesh face cardinality and resolved indices",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.geometry",
+      "method": "Check finite bounds and non-collinear triangle fan",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.units",
+      "method": "Require explicit length unit when requested; never infer STL/OBJ units",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.values",
+      "method": "STL count/byte layout or complete facet grammar; preserve declared normals and source values",
+      "reason": null,
+      "result": "pass"
+    }
+  ],
+  "limitations": [],
+  "manifest_sha256": "7746ef811e04e5bb5608d69f1f28d68b6088213a377000dd013c6966b5c10719",
+  "object_id": "ascii-9ac3ea4a",
+  "profile_sha256": "c6aa0d5844f19ce0c6e1f71addd5f9d5337da3647daaca7df36bd53a80d86a52",
+  "schema_version": "general-parser.acceptance.v1",
+  "source_manifest_sha256": "8e77f2c1a7157da31ef520a328291c1bdddf466ae4118b2efac16ffbe5365ff8",
+  "state": "local_ready",
+  "version": "v1"
+}

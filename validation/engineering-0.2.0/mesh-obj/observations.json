@@ -1,0 +1,13 @@
+{
+  "hypotheses": [],
+  "items": [],
+  "object_id": "mesh-32dfb0a7",
+  "observed_at": null,
+  "observer": null,
+  "profile_sha256": "500404994b7ccd2fee49ec3b2a339bff34834e38fe9b3e2d231d5519de96d456",
+  "reason": "This adapter performs structural/numeric extraction; it has not viewed or listened to evidence.",
+  "review_status": "skipped",
+  "schema_version": "general-parser.observations.v1",
+  "source_manifest_sha256": "5561df96c5e15af8071c363a7648502803dd3a5de99f3ee24a3450c24cf65da3",
+  "version": "v1"
+}

@@ -1,0 +1,82 @@
+{
+  "checks": [
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "content.fidelity",
+      "method": "Run format value checks; preserve full declared representation and source locators",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "content.coverage",
+      "method": "Consume full source within declared adapter scope; never silently truncate on limits",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "document.consistency",
+      "method": "Generate facts and asset from the same metrics; readback verified before commit",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.replay",
+      "method": "Reparse immutable source and compare full representation and metrics",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "format.structure",
+      "method": "Validate rectangular rows and unique nonempty column names",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.values",
+      "method": "CSV writer/reader roundtrip preserves every string cell, including empty and zero",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.time",
+      "method": "Check strict ordering in declared time basis",
+      "reason": null,
+      "result": "pass"
+    }
+  ],
+  "limitations": [],
+  "manifest_sha256": "84a10cf11cacfb268a15a32ef726e79d14e8f34071b1f5d6a468bceec4b9a9a9",
+  "object_id": "table-59a04919",
+  "profile_sha256": "cec6f8e9b75be23910d67641d06b4f58712a5188eab555c2950a8f4f802a3b1c",
+  "schema_version": "general-parser.acceptance.v1",
+  "source_manifest_sha256": "d81373069f55122120b76b08fb733159a6ec3d09cdab9601cc610c82a0bb35f3",
+  "state": "local_ready",
+  "version": "v1"
+}

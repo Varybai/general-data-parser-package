@@ -1,0 +1,104 @@
+{
+  "data": {
+    "coordinate_system": "source axes, no transform",
+    "faces": [
+      {
+        "declared_normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "locator": {
+          "line": 2,
+          "line_base": 1
+        },
+        "vertices": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "length_unit": "mm",
+    "metadata": {
+      "encoding": "ascii",
+      "solid_name": "t"
+    },
+    "unit_basis": "caller declaration",
+    "vertices": [
+      {
+        "locator": {
+          "line": 4,
+          "line_base": 1
+        },
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "source_numbers": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      {
+        "locator": {
+          "line": 5,
+          "line_base": 1
+        },
+        "position": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "source_numbers": [
+          "2",
+          "0",
+          "0"
+        ]
+      },
+      {
+        "locator": {
+          "line": 6,
+          "line_base": 1
+        },
+        "position": [
+          0.0,
+          3.0,
+          0.0
+        ],
+        "source_numbers": [
+          "0",
+          "3",
+          "0"
+        ]
+      }
+    ]
+  },
+  "format": "stl",
+  "metrics": {
+    "bbox": {
+      "extent": [
+        2.0,
+        3.0,
+        0.0
+      ],
+      "max": [
+        2.0,
+        3.0,
+        0.0
+      ],
+      "method": "extrema of parsed vertices; binary64 arithmetic",
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "unit": "mm"
+    },
+    "face_count": 1,
+    "vertex_count": 3
+  },
+  "schema_version": "general-parser.data.v1"
+}

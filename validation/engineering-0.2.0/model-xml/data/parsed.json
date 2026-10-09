@@ -1,0 +1,54 @@
+{
+  "data": {
+    "names": "namespace-expanded names",
+    "nodes": [
+      {
+        "attributes": {
+          "unit": "mm"
+        },
+        "children": [
+          1,
+          2
+        ],
+        "id": 0,
+        "path_indices": [],
+        "tag": "model",
+        "tail": null,
+        "text": null
+      },
+      {
+        "attributes": {
+          "id": "a"
+        },
+        "children": [],
+        "id": 1,
+        "path_indices": [
+          0
+        ],
+        "tag": "part",
+        "tail": null,
+        "text": null
+      },
+      {
+        "attributes": {
+          "id": "b"
+        },
+        "children": [],
+        "id": 2,
+        "path_indices": [
+          1
+        ],
+        "tag": "part",
+        "tail": null,
+        "text": null
+      }
+    ],
+    "root": 0
+  },
+  "format": "xml",
+  "metrics": {
+    "element_count": 3,
+    "node_count": 3
+  },
+  "schema_version": "general-parser.data.v1"
+}

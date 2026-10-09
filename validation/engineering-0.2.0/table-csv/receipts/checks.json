@@ -1,0 +1,65 @@
+{
+  "checks": [
+    {
+      "actual": null,
+      "executed": true,
+      "expected": null,
+      "id": "content.fidelity",
+      "method": "Run format value checks; preserve full declared representation and source locators",
+      "result": "pass"
+    },
+    {
+      "actual": null,
+      "executed": true,
+      "expected": null,
+      "id": "content.coverage",
+      "method": "Consume full source within declared adapter scope; never silently truncate on limits",
+      "result": "pass"
+    },
+    {
+      "actual": null,
+      "executed": true,
+      "expected": null,
+      "id": "document.consistency",
+      "method": "Generate facts and asset from the same metrics; readback verified before commit",
+      "result": "pass"
+    },
+    {
+      "actual": null,
+      "executed": true,
+      "expected": null,
+      "id": "engineering.replay",
+      "method": "Reparse immutable source and compare full representation and metrics",
+      "result": "pass"
+    },
+    {
+      "actual": null,
+      "executed": true,
+      "expected": null,
+      "id": "format.structure",
+      "method": "Validate rectangular rows and unique nonempty column names",
+      "result": "pass"
+    },
+    {
+      "actual": null,
+      "executed": true,
+      "expected": null,
+      "id": "engineering.values",
+      "method": "CSV writer/reader roundtrip preserves every string cell, including empty and zero",
+      "result": "pass"
+    },
+    {
+      "actual": [
+        "0.001",
+        "0.001"
+      ],
+      "executed": true,
+      "expected": "positive gaps",
+      "id": "engineering.time",
+      "method": "Check strict ordering in declared time basis",
+      "result": "pass"
+    }
+  ],
+  "coverage": "declared scope only",
+  "perception_executed": false
+}

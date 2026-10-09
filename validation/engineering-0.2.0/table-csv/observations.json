@@ -1,0 +1,13 @@
+{
+  "hypotheses": [],
+  "items": [],
+  "object_id": "table-59a04919",
+  "observed_at": null,
+  "observer": null,
+  "profile_sha256": "cec6f8e9b75be23910d67641d06b4f58712a5188eab555c2950a8f4f802a3b1c",
+  "reason": "This adapter performs structural/numeric extraction; it has not viewed or listened to evidence.",
+  "review_status": "skipped",
+  "schema_version": "general-parser.observations.v1",
+  "source_manifest_sha256": "d81373069f55122120b76b08fb733159a6ec3d09cdab9601cc610c82a0bb35f3",
+  "version": "v1"
+}

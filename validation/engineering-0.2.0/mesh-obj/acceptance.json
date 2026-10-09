@@ -1,0 +1,92 @@
+{
+  "checks": [
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "content.fidelity",
+      "method": "Run format value checks; preserve full declared representation and source locators",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "content.coverage",
+      "method": "Consume full source within declared adapter scope; never silently truncate on limits",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "document.consistency",
+      "method": "Generate facts and asset from the same metrics; readback verified before commit",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.replay",
+      "method": "Reparse immutable source and compare full representation and metrics",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "format.structure",
+      "method": "Validate mesh face cardinality and resolved indices",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.geometry",
+      "method": "Check finite bounds and non-collinear triangle fan",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.units",
+      "method": "Require explicit length unit when requested; never infer STL/OBJ units",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.values",
+      "method": "Resolve positive/negative OBJ references; retain original coordinate tokens and declaration lines",
+      "reason": null,
+      "result": "pass"
+    }
+  ],
+  "limitations": [],
+  "manifest_sha256": "f5b6d91cded9194b948cb1af21985f12627632c28fc3723a48181b9d3f8c23ab",
+  "object_id": "mesh-32dfb0a7",
+  "profile_sha256": "500404994b7ccd2fee49ec3b2a339bff34834e38fe9b3e2d231d5519de96d456",
+  "schema_version": "general-parser.acceptance.v1",
+  "source_manifest_sha256": "5561df96c5e15af8071c363a7648502803dd3a5de99f3ee24a3450c24cf65da3",
+  "state": "local_ready",
+  "version": "v1"
+}

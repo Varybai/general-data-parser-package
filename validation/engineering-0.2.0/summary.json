@@ -1,0 +1,120 @@
+{
+  "inputs": 8,
+  "formats": 7,
+  "results": [
+    {
+      "input": "table.csv",
+      "bundle": "table-csv",
+      "state": "local_ready",
+      "independent_expected": {
+        "record_count": 3
+      },
+      "source_replay_validation": "pass",
+      "format_checks": [
+        "format.structure",
+        "engineering.values",
+        "engineering.time"
+      ]
+    },
+    {
+      "input": "table.tsv",
+      "bundle": "table-tsv",
+      "state": "local_ready",
+      "independent_expected": {
+        "column_count": 2
+      },
+      "source_replay_validation": "pass",
+      "format_checks": [
+        "format.structure",
+        "engineering.values"
+      ]
+    },
+    {
+      "input": "records.json",
+      "bundle": "records-json",
+      "state": "local_ready",
+      "independent_expected": {
+        "numeric_token_count": 2
+      },
+      "source_replay_validation": "pass",
+      "format_checks": [
+        "format.structure",
+        "engineering.values"
+      ]
+    },
+    {
+      "input": "records.jsonl",
+      "bundle": "records-jsonl",
+      "state": "local_ready",
+      "independent_expected": {
+        "record_count": 2
+      },
+      "source_replay_validation": "pass",
+      "format_checks": [
+        "format.structure",
+        "engineering.values"
+      ]
+    },
+    {
+      "input": "model.xml",
+      "bundle": "model-xml",
+      "state": "local_ready_with_limitations",
+      "independent_expected": {
+        "element_count": 3
+      },
+      "source_replay_validation": "pass",
+      "format_checks": [
+        "format.structure",
+        "engineering.values"
+      ]
+    },
+    {
+      "input": "ascii.stl",
+      "bundle": "ascii-stl",
+      "state": "local_ready",
+      "independent_expected": {
+        "face_count": 1
+      },
+      "source_replay_validation": "pass",
+      "format_checks": [
+        "format.structure",
+        "engineering.geometry",
+        "engineering.units",
+        "engineering.values"
+      ]
+    },
+    {
+      "input": "binary.stl",
+      "bundle": "binary-stl",
+      "state": "local_ready",
+      "independent_expected": {
+        "face_count": 1
+      },
+      "source_replay_validation": "pass",
+      "format_checks": [
+        "format.structure",
+        "engineering.geometry",
+        "engineering.units",
+        "engineering.values"
+      ]
+    },
+    {
+      "input": "mesh.obj",
+      "bundle": "mesh-obj",
+      "state": "local_ready",
+      "independent_expected": {
+        "vertex_count": 3
+      },
+      "source_replay_validation": "pass",
+      "format_checks": [
+        "format.structure",
+        "engineering.geometry",
+        "engineering.units",
+        "engineering.values"
+      ]
+    }
+  ],
+  "model_calls": 0,
+  "backend_calls": 0,
+  "scope": "Small synthetic fixtures; engineering acceptance concerns parsed data, not physical performance."
+}

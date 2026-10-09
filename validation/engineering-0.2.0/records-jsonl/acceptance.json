@@ -1,0 +1,72 @@
+{
+  "checks": [
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "content.fidelity",
+      "method": "Run format value checks; preserve full declared representation and source locators",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "content.coverage",
+      "method": "Consume full source within declared adapter scope; never silently truncate on limits",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "document.consistency",
+      "method": "Generate facts and asset from the same metrics; readback verified before commit",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.replay",
+      "method": "Reparse immutable source and compare full representation and metrics",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "format.structure",
+      "method": "Strict JSON decoding rejects duplicate keys and nonstandard constants",
+      "reason": null,
+      "result": "pass"
+    },
+    {
+      "evidence": [
+        "receipts/checks.json"
+      ],
+      "executed": true,
+      "id": "engineering.values",
+      "method": "Preserve numeric tokens without floating-point conversion; preserve null, boolean and string types",
+      "reason": null,
+      "result": "pass"
+    }
+  ],
+  "limitations": [],
+  "manifest_sha256": "739b246a9248cd264770fb031eb8b611274a7990de0fa8ed4b3b87991bffaaa3",
+  "object_id": "records-bfa6721f",
+  "profile_sha256": "ce60f98becaa9ea2cee49e584c16add8d881a44021ceb45807a370f9e4fa6c64",
+  "schema_version": "general-parser.acceptance.v1",
+  "source_manifest_sha256": "3d8c7d820e6bcd80b2da6f6fff951325a0a959050cb0dd567c6ff70d64cc64de",
+  "state": "local_ready",
+  "version": "v1"
+}
