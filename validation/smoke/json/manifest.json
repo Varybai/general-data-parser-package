@@ -1,0 +1,61 @@
+{
+  "schema_version": "general-parser.manifest.v1",
+  "object_id": "sample-json",
+  "version": "v1",
+  "files": [
+    {
+      "path": ".abstract.md",
+      "role": "abstract",
+      "sha256": "1c4e67cb2ac534039a9719f86e34f338f2295d23b831dc0eb2693deb114af046",
+      "size_bytes": 80
+    },
+    {
+      "path": ".overview.md",
+      "role": "overview",
+      "sha256": "9497a8581411747b0097ea6e7653b7fd287e54f4c5749cdce69e895dc1930bf2",
+      "size_bytes": 315
+    },
+    {
+      "path": "asset.md",
+      "role": "asset",
+      "sha256": "9497a8581411747b0097ea6e7653b7fd287e54f4c5749cdce69e895dc1930bf2",
+      "size_bytes": 315
+    },
+    {
+      "path": "facts.json",
+      "role": "facts",
+      "sha256": "968280067c6534e139e56630ccbdff8db84b50ec6422977ed2df9fe7ecef4c69",
+      "size_bytes": 1454
+    },
+    {
+      "path": "observations.json",
+      "role": "observations",
+      "sha256": "5a0afde84faed3308ed87158e22b6f98b9683b0f4003d756aed498b41aad4b22",
+      "size_bytes": 473
+    },
+    {
+      "path": "profile.json",
+      "role": "profile",
+      "sha256": "5f55e44c68c72ccf0980c37d4a4240a9ca7648feeb3eaacea0d84928bbeb7d54",
+      "size_bytes": 666
+    },
+    {
+      "path": "receipts/content-check.json",
+      "role": "receipt",
+      "sha256": "b3cfb07fc3b7284f53a1a04bb82a810ed7f541be6eed096617b28f02fa0d3fb5",
+      "size_bytes": 715
+    },
+    {
+      "path": "receipts/parse.json",
+      "role": "receipt",
+      "sha256": "f4464f7a813dce2cc28dd03367c1d7480051cabd1f54d9ee44887c340b4baac4",
+      "size_bytes": 330
+    },
+    {
+      "path": "source/input.json",
+      "role": "source",
+      "sha256": "f1b5c6003f65875a36f87c01add9a168191bb51fbcd8fc83766ce524b3bff240",
+      "size_bytes": 71
+    }
+  ]
+}

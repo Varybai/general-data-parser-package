@@ -1,0 +1,52 @@
+{
+  "schema_version": "general-parser.acceptance.v1",
+  "object_id": "sample-csv",
+  "version": "v1",
+  "profile_sha256": "1227fde92dcc4f0be9f0ae5afacb44aa0b264adad064ca6eb0a5a39f49e832c1",
+  "source_manifest_sha256": "a10ba23db47893cf2fd5cb7d265a0e6cb17c27f8c73bce507adb3f7bf2a3ddd9",
+  "manifest_sha256": "c0f86bd74f1fd25fd45ddec6c6f427a48fb5317a6467cfb22e58265b53479613",
+  "state": "local_ready",
+  "limitations": [],
+  "checks": [
+    {
+      "id": "content.fidelity",
+      "executed": true,
+      "result": "pass",
+      "method": "Independent fixture constants and document roundtrip comparison",
+      "evidence": [
+        "receipts/content-check.json"
+      ],
+      "reason": null
+    },
+    {
+      "id": "content.coverage",
+      "executed": true,
+      "result": "pass",
+      "method": "Independent fixture constants and document roundtrip comparison",
+      "evidence": [
+        "receipts/content-check.json"
+      ],
+      "reason": null
+    },
+    {
+      "id": "document.consistency",
+      "executed": true,
+      "result": "pass",
+      "method": "Independent fixture constants and document roundtrip comparison",
+      "evidence": [
+        "receipts/content-check.json"
+      ],
+      "reason": null
+    },
+    {
+      "id": "format.csv",
+      "executed": true,
+      "result": "pass",
+      "method": "Independent fixture constants and document roundtrip comparison",
+      "evidence": [
+        "receipts/content-check.json"
+      ],
+      "reason": null
+    }
+  ]
+}

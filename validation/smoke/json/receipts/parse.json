@@ -1,0 +1,17 @@
+{
+  "tool": "Python strict JSON",
+  "source": "source/input.json",
+  "input_sha256": "f1b5c6003f65875a36f87c01add9a168191bb51fbcd8fc83766ce524b3bff240",
+  "count": 4,
+  "output": {
+    "id": 9007199254740993,
+    "items": [
+      1,
+      null,
+      0
+    ],
+    "empty": [],
+    "label": "零件"
+  },
+  "status": "succeeded"
+}

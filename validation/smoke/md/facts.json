@@ -1,0 +1,63 @@
+{
+  "schema_version": "general-parser.facts.v1",
+  "object_id": "sample-md",
+  "version": "v1",
+  "profile_sha256": "4894fdcb63a72234acf11b6427db10b7a65b76b979522c299768bda598a72b05",
+  "source_manifest_sha256": "e80bb09a8905346dca251aa96325c92ccdbfb05a5365cf02833117375ff05fb5",
+  "extraction": {
+    "status": "succeeded",
+    "tool": "Python UTF-8 line reader",
+    "tool_version": "3.14.7",
+    "receipt": "receipts/parse.json",
+    "losses": []
+  },
+  "claims": [
+    {
+      "id": "parsed",
+      "kind": "extracted",
+      "status": "known",
+      "value": [
+        "# 样本",
+        "",
+        "数量：3。",
+        "禁止把未知值填为 0。"
+      ],
+      "unit": null,
+      "basis": [
+        {
+          "path": "source/input.md",
+          "locator": {
+            "lines": [
+              1,
+              4
+            ],
+            "line_base": 1
+          },
+          "method": "Python UTF-8 line reader"
+        }
+      ],
+      "reason": null
+    },
+    {
+      "id": "count",
+      "kind": "computed",
+      "status": "known",
+      "value": 4,
+      "unit": "entries",
+      "basis": [
+        {
+          "path": "receipts/parse.json",
+          "locator": {
+            "field": "count"
+          },
+          "method": "count parsed entries; compare independent fixture expectation"
+        }
+      ],
+      "reason": null
+    }
+  ],
+  "diagnostics": [],
+  "limitations": [
+    "Validation applies only to this synthetic fixture."
+  ]
+}

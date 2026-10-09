@@ -1,0 +1,38 @@
+{
+  "executed": true,
+  "method": "Compare parsed values and document JSON against independent fixture constants",
+  "expected": {
+    "id": 9007199254740993,
+    "items": [
+      1,
+      null,
+      0
+    ],
+    "empty": [],
+    "label": "零件"
+  },
+  "actual": {
+    "id": 9007199254740993,
+    "items": [
+      1,
+      null,
+      0
+    ],
+    "empty": [],
+    "label": "零件"
+  },
+  "document_values": {
+    "id": 9007199254740993,
+    "items": [
+      1,
+      null,
+      0
+    ],
+    "empty": [],
+    "label": "零件"
+  },
+  "count": 4,
+  "coverage": "all fixture bytes/records read",
+  "result": "pass",
+  "observation_note": "No real model call; reviewed variant is a contract-test fixture only."
+}

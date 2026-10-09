@@ -1,0 +1,24 @@
+{
+  "tool": "Python csv.DictReader",
+  "source": "source/input.csv",
+  "input_sha256": "804c32a62048ed0fd2d0a13a8c887049c8639f689213d8cef39056bbf3ba72cc",
+  "count": 3,
+  "output": [
+    {
+      "sku": "A",
+      "quantity": "2",
+      "note": "comma, note"
+    },
+    {
+      "sku": "B",
+      "quantity": "0",
+      "note": ""
+    },
+    {
+      "sku": "C",
+      "quantity": "3",
+      "note": "final"
+    }
+  ],
+  "status": "succeeded"
+}

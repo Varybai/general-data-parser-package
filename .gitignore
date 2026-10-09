@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.pytest_cache/
+.ruff_cache/
+node_modules/
+*.tgz
+/dist/
+/validation/install-work/
+.env
+*.key
+*.pem

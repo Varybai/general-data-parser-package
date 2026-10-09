@@ -1,0 +1,74 @@
+{
+  "schema_version": "general-parser.facts.v1",
+  "object_id": "sample-csv",
+  "version": "v1",
+  "profile_sha256": "1227fde92dcc4f0be9f0ae5afacb44aa0b264adad064ca6eb0a5a39f49e832c1",
+  "source_manifest_sha256": "a10ba23db47893cf2fd5cb7d265a0e6cb17c27f8c73bce507adb3f7bf2a3ddd9",
+  "extraction": {
+    "status": "succeeded",
+    "tool": "Python csv.DictReader",
+    "tool_version": "3.14.7",
+    "receipt": "receipts/parse.json",
+    "losses": []
+  },
+  "claims": [
+    {
+      "id": "parsed",
+      "kind": "extracted",
+      "status": "known",
+      "value": [
+        {
+          "sku": "A",
+          "quantity": "2",
+          "note": "comma, note"
+        },
+        {
+          "sku": "B",
+          "quantity": "0",
+          "note": ""
+        },
+        {
+          "sku": "C",
+          "quantity": "3",
+          "note": "final"
+        }
+      ],
+      "unit": null,
+      "basis": [
+        {
+          "path": "source/input.csv",
+          "locator": {
+            "rows": [
+              2,
+              4
+            ],
+            "row_base": 1
+          },
+          "method": "Python csv.DictReader"
+        }
+      ],
+      "reason": null
+    },
+    {
+      "id": "count",
+      "kind": "computed",
+      "status": "known",
+      "value": 3,
+      "unit": "entries",
+      "basis": [
+        {
+          "path": "receipts/parse.json",
+          "locator": {
+            "field": "count"
+          },
+          "method": "count parsed entries; compare independent fixture expectation"
+        }
+      ],
+      "reason": null
+    }
+  ],
+  "diagnostics": [],
+  "limitations": [
+    "Validation applies only to this synthetic fixture."
+  ]
+}

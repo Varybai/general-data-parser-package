@@ -1,0 +1,29 @@
+{
+  "schema_version": "general-parser.profile.v1",
+  "id": "fixture.csv.v1",
+  "format": "csv",
+  "output_language": "zh",
+  "adapter": {
+    "tool": "Python csv.DictReader",
+    "version": "3.14.7",
+    "options": {},
+    "supported_scope": [
+      "synthetic small fixture only"
+    ]
+  },
+  "roles": {
+    "facts": "facts.json",
+    "observations": "observations.json",
+    "asset": "asset.md",
+    "abstract": ".abstract.md",
+    "overview": ".overview.md"
+  },
+  "observation_policy": "not_applicable",
+  "overview_relation": "identical",
+  "required_checks": [
+    "content.fidelity",
+    "content.coverage",
+    "document.consistency",
+    "format.csv"
+  ]
+}

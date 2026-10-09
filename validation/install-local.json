@@ -1,0 +1,36 @@
+{
+  "pi_version": "1.0.4",
+  "skills_cli_version": "1.5.25",
+  "node_version": "24.19.0",
+  "npm_version": "12.0.2",
+  "pi_local_install": {
+    "registered": true,
+    "loader_discovered": 1,
+    "diagnostics": [],
+    "advertised_in_prompt": true
+  },
+  "skills_local_install": {
+    "agent": "pi",
+    "directory": ".pi/skills/general-data-parser",
+    "files_byte_identical": 10,
+    "verifier": {
+      "structural_validation": "pass",
+      "recorded_required_checks_passed": true,
+      "declared_state": "local_ready",
+      "object_id": "sample-csv",
+      "version": "v1",
+      "files_verified": 9,
+      "profile": "fixture.csv.v1",
+      "semantic_validation": "not_performed_by_this_verifier"
+    }
+  },
+  "npm_pack": {
+    "files": 12,
+    "includes": [
+      "package.json",
+      "README.md",
+      "10 skill files"
+    ],
+    "root_dependencies": 0
+  }
+}

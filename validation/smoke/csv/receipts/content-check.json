@@ -1,0 +1,59 @@
+{
+  "executed": true,
+  "method": "Compare parsed values and document JSON against independent fixture constants",
+  "expected": [
+    {
+      "sku": "A",
+      "quantity": "2",
+      "note": "comma, note"
+    },
+    {
+      "sku": "B",
+      "quantity": "0",
+      "note": ""
+    },
+    {
+      "sku": "C",
+      "quantity": "3",
+      "note": "final"
+    }
+  ],
+  "actual": [
+    {
+      "sku": "A",
+      "quantity": "2",
+      "note": "comma, note"
+    },
+    {
+      "sku": "B",
+      "quantity": "0",
+      "note": ""
+    },
+    {
+      "sku": "C",
+      "quantity": "3",
+      "note": "final"
+    }
+  ],
+  "document_values": [
+    {
+      "sku": "A",
+      "quantity": "2",
+      "note": "comma, note"
+    },
+    {
+      "sku": "B",
+      "quantity": "0",
+      "note": ""
+    },
+    {
+      "sku": "C",
+      "quantity": "3",
+      "note": "final"
+    }
+  ],
+  "count": 3,
+  "coverage": "all fixture bytes/records read",
+  "result": "pass",
+  "observation_note": "No real model call; reviewed variant is a contract-test fixture only."
+}

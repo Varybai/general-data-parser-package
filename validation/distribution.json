@@ -1,0 +1,7 @@
+{
+  "archive": "general-data-parser-0.1.0.zip",
+  "sha256": "c1d5375cb8e04691bf1d58d72827b0242b77949422c7ba45ca5f0be285071370",
+  "files_byte_identical": 10,
+  "installed_copy_runtime_evidence": "install-local.json",
+  "installed_to_global_agent_directories": false
+}

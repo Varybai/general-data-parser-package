@@ -1,0 +1,26 @@
+{
+  "executed": true,
+  "method": "Compare parsed values and document JSON against independent fixture constants",
+  "expected": [
+    "# 样本",
+    "",
+    "数量：3。",
+    "禁止把未知值填为 0。"
+  ],
+  "actual": [
+    "# 样本",
+    "",
+    "数量：3。",
+    "禁止把未知值填为 0。"
+  ],
+  "document_values": [
+    "# 样本",
+    "",
+    "数量：3。",
+    "禁止把未知值填为 0。"
+  ],
+  "count": 4,
+  "coverage": "all fixture bytes/records read",
+  "result": "pass",
+  "observation_note": "No real model call; reviewed variant is a contract-test fixture only."
+}

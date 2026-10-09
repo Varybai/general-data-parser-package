@@ -1,0 +1,43 @@
+{
+  "samples": [
+    {
+      "structural_validation": "pass",
+      "recorded_required_checks_passed": true,
+      "declared_state": "local_ready",
+      "object_id": "sample-csv",
+      "version": "v1",
+      "files_verified": 9,
+      "profile": "fixture.csv.v1",
+      "semantic_validation": "not_performed_by_this_verifier",
+      "input_format": "csv",
+      "content_validation": "independent fixture values and document roundtrip passed"
+    },
+    {
+      "structural_validation": "pass",
+      "recorded_required_checks_passed": true,
+      "declared_state": "local_ready",
+      "object_id": "sample-json",
+      "version": "v1",
+      "files_verified": 9,
+      "profile": "fixture.json.v1",
+      "semantic_validation": "not_performed_by_this_verifier",
+      "input_format": "json",
+      "content_validation": "independent fixture values and document roundtrip passed"
+    },
+    {
+      "structural_validation": "pass",
+      "recorded_required_checks_passed": true,
+      "declared_state": "local_ready",
+      "object_id": "sample-md",
+      "version": "v1",
+      "files_verified": 9,
+      "profile": "fixture.md.v1",
+      "semantic_validation": "not_performed_by_this_verifier",
+      "input_format": "md",
+      "content_validation": "independent fixture values and document roundtrip passed"
+    }
+  ],
+  "remote_calls": 0,
+  "model_calls": 0,
+  "limits": "Only these small synthetic CSV/JSON/Markdown inputs were converted; other formats untested."
+}

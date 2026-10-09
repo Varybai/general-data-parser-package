@@ -1,0 +1,61 @@
+{
+  "schema_version": "general-parser.manifest.v1",
+  "object_id": "sample-csv",
+  "version": "v1",
+  "files": [
+    {
+      "path": ".abstract.md",
+      "role": "abstract",
+      "sha256": "03de53c7f56e6326f631a705731d89742d3da4b5149efddfd301fdd985bcef94",
+      "size_bytes": 79
+    },
+    {
+      "path": ".overview.md",
+      "role": "overview",
+      "sha256": "09ea164c293866062a219827438f6fa3f14fef97a38ed221e169c0de53cba665",
+      "size_bytes": 409
+    },
+    {
+      "path": "asset.md",
+      "role": "asset",
+      "sha256": "09ea164c293866062a219827438f6fa3f14fef97a38ed221e169c0de53cba665",
+      "size_bytes": 409
+    },
+    {
+      "path": "facts.json",
+      "role": "facts",
+      "sha256": "e639b64f9731850305b43dbf582b86172e407197b9e3e3172ab692d9a67339d5",
+      "size_bytes": 1661
+    },
+    {
+      "path": "observations.json",
+      "role": "observations",
+      "sha256": "1d47763725abc6d4c15fa8fcd459622ee668f4edb74282bfeea99e9bad191b15",
+      "size_bytes": 472
+    },
+    {
+      "path": "profile.json",
+      "role": "profile",
+      "sha256": "1227fde92dcc4f0be9f0ae5afacb44aa0b264adad064ca6eb0a5a39f49e832c1",
+      "size_bytes": 666
+    },
+    {
+      "path": "receipts/content-check.json",
+      "role": "receipt",
+      "sha256": "c9c345a86ccb47fae126192c71cd549fb9885019bd7b1880b73fcbd5b49fe781",
+      "size_bytes": 1045
+    },
+    {
+      "path": "receipts/parse.json",
+      "role": "receipt",
+      "sha256": "a7af08e05b50e6fc593b31531f121e2729ffa5cb7476b42a7ed7ffc5368ec116",
+      "size_bytes": 442
+    },
+    {
+      "path": "source/input.csv",
+      "role": "source",
+      "sha256": "804c32a62048ed0fd2d0a13a8c887049c8639f689213d8cef39056bbf3ba72cc",
+      "size_bytes": 51
+    }
+  ]
+}

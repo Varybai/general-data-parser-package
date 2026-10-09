@@ -1,0 +1,63 @@
+{
+  "schema_version": "general-parser.facts.v1",
+  "object_id": "sample-json",
+  "version": "v1",
+  "profile_sha256": "5f55e44c68c72ccf0980c37d4a4240a9ca7648feeb3eaacea0d84928bbeb7d54",
+  "source_manifest_sha256": "1f5b999fca0c627ece4b9ee2319947722a27864a918e85ab4c6d77dbc4d0c728",
+  "extraction": {
+    "status": "succeeded",
+    "tool": "Python strict JSON",
+    "tool_version": "3.14.7",
+    "receipt": "receipts/parse.json",
+    "losses": []
+  },
+  "claims": [
+    {
+      "id": "parsed",
+      "kind": "extracted",
+      "status": "known",
+      "value": {
+        "id": 9007199254740993,
+        "items": [
+          1,
+          null,
+          0
+        ],
+        "empty": [],
+        "label": "零件"
+      },
+      "unit": null,
+      "basis": [
+        {
+          "path": "source/input.json",
+          "locator": {
+            "json_pointer": ""
+          },
+          "method": "Python strict JSON"
+        }
+      ],
+      "reason": null
+    },
+    {
+      "id": "count",
+      "kind": "computed",
+      "status": "known",
+      "value": 4,
+      "unit": "entries",
+      "basis": [
+        {
+          "path": "receipts/parse.json",
+          "locator": {
+            "field": "count"
+          },
+          "method": "count parsed entries; compare independent fixture expectation"
+        }
+      ],
+      "reason": null
+    }
+  ],
+  "diagnostics": [],
+  "limitations": [
+    "Validation applies only to this synthetic fixture."
+  ]
+}

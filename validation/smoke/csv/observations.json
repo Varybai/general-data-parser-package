@@ -1,0 +1,13 @@
+{
+  "schema_version": "general-parser.observations.v1",
+  "object_id": "sample-csv",
+  "version": "v1",
+  "profile_sha256": "1227fde92dcc4f0be9f0ae5afacb44aa0b264adad064ca6eb0a5a39f49e832c1",
+  "source_manifest_sha256": "a10ba23db47893cf2fd5cb7d265a0e6cb17c27f8c73bce507adb3f7bf2a3ddd9",
+  "review_status": "skipped",
+  "observer": null,
+  "observed_at": null,
+  "items": [],
+  "hypotheses": [],
+  "reason": "Text/structured fixture is checked directly against source."
+}

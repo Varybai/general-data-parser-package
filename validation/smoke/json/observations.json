@@ -1,0 +1,13 @@
+{
+  "schema_version": "general-parser.observations.v1",
+  "object_id": "sample-json",
+  "version": "v1",
+  "profile_sha256": "5f55e44c68c72ccf0980c37d4a4240a9ca7648feeb3eaacea0d84928bbeb7d54",
+  "source_manifest_sha256": "1f5b999fca0c627ece4b9ee2319947722a27864a918e85ab4c6d77dbc4d0c728",
+  "review_status": "skipped",
+  "observer": null,
+  "observed_at": null,
+  "items": [],
+  "hypotheses": [],
+  "reason": "Text/structured fixture is checked directly against source."
+}
