@@ -56,7 +56,9 @@ def refresh(root, rebind=True):
                                 separators=(",", ":"), allow_nan=False).encode())
     report = load(root, "acceptance.json")
     if rebind:
-        for name in (profile["roles"]["facts"], profile["roles"]["observations"], "acceptance.json"):
+        metadata_paths = [profile["roles"][role] for role in ("facts", "observations")
+                          if role in profile["roles"]] + ["acceptance.json"]
+        for name in metadata_paths:
             data = load(root, name)
             data["source_manifest_sha256"] = source_sha
             data["profile_sha256"] = sha((root / "profile.json").read_bytes())

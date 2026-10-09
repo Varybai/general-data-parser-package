@@ -1,8 +1,10 @@
 # 产物模板
 
-复制到对象版本目录并填入真实执行值。`REPLACE_*` 是待替换项，不是可交付内容。先固定 profile 和源，再计算绑定哈希；清单覆盖全部实际文件，最后写报告。模板本身不证明执行或通过。
+先按 parse_owner 选择模板，只使用对应分支。后端直入不创建本地解析三件套。复制到对象版本目录并填入真实执行值。`REPLACE_*` 是待替换项，不是可交付内容。先固定 profile 和源，再计算绑定哈希；清单覆盖全部实际文件，最后写报告。模板本身不证明执行或通过。
 
-## profile.json
+## OV 原文件直入：profile.json
+
+先确认当前 OV 路由满足任务。此模式只提交原文件；以下 profile 和回执保留在审计侧。observation_policy 按任务选择；required 时把 observation.consistency 加入 publication_checks。
 
 ```json
 {
@@ -10,6 +12,49 @@
   "id": "REPLACE_PROFILE_ID",
   "format": "REPLACE_DETECTED_FORMAT",
   "output_language": "zh",
+  "parse_owner": "backend",
+  "backend": "openviking",
+  "adapter": {"tool": "REPLACE_ACTUAL_OV_ROUTE", "version": "REPLACE_OBSERVED_VERSION_OR_UNREPORTED"},
+  "roles": {},
+  "summary_owner": "backend",
+  "observation_policy": "REPLACE_POLICY",
+  "required_checks": ["input.integrity", "backend.capability"],
+  "publication_checks": ["remote.parse", "content.fidelity", "content.coverage", "document.consistency", "remote.bytes", "remote.index", "remote.query", "remote.summaries"]
+}
+```
+
+## OV 原文件直入：acceptance.json
+
+预检完成后才可设 ready_to_submit；实际解析、内容及远端检查全部通过后才能设 published。解析正文和来源保持 OV 原生组织，通过回执记录 URI、任务、哈希和核验，不重建 facts/asset。
+
+```json
+{
+  "schema_version": "general-parser.acceptance.v1",
+  "object_id": "REPLACE_OBJECT_ID",
+  "version": "REPLACE_OBJECT_VERSION",
+  "manifest_sha256": "REPLACE_MANIFEST_BYTES_SHA256",
+  "profile_sha256": "REPLACE_PROFILE_BYTES_SHA256",
+  "source_manifest_sha256": "REPLACE_SOURCE_MANIFEST_SHA256",
+  "state": "prepared",
+  "checks": [
+    {"id": "input.integrity", "executed": false, "result": "unknown", "method": null, "evidence": [], "reason": "尚未核对输入"},
+    {"id": "backend.capability", "executed": false, "result": "unknown", "method": null, "evidence": [], "reason": "尚未确认当前后端能力"}
+  ],
+  "limitations": []
+}
+```
+
+manifest 使用下方通用模板；后端模式枚举原文件、依赖、profile 和真实回执，不枚举本地 facts/observations/asset。
+
+## 独立或额外提取：profile.json
+
+```json
+{
+  "schema_version": "general-parser.profile.v1",
+  "id": "REPLACE_PROFILE_ID",
+  "format": "REPLACE_DETECTED_FORMAT",
+  "output_language": "zh",
+  "parse_owner": "local",
   "adapter": {
     "tool": "REPLACE_ACTUAL_TOOL",
     "version": "REPLACE_ACTUAL_VERSION",
@@ -31,7 +76,7 @@
 
 把本次格式专项加入 required_checks；required 观察增加 observation.consistency。发布检查单独放入 publication_checks，至少有 remote.bytes、remote.index、remote.query。
 
-OV 入库将 summary_owner 改为 backend，增加 backend=openviking，并在 publication_checks 增加 remote.summaries；roles 保持上面的三类。只有用户要求独立本地摘要时才改为 local，在 roles 增加 abstract/overview 两项，并设置 overview_relation=identical。根据源记录单位、坐标、时区、编码及实际依赖，不擅设未知单位。
+如果仅把独立解析结果发布给 OV，可设 summary_owner=backend，并写入 backend=openviking 与明确的 local_parse_reason，再增加发布检查。普通 OV 已支持格式直接使用上方原文件直入模板，不套用此本地模板。只有用户要求独立本地摘要时才改为 local，在 roles 增加 abstract/overview 两项，并设置 overview_relation=identical。根据源记录单位、坐标、时区、编码及实际依赖，不擅设未知单位。
 
 ## facts.json
 

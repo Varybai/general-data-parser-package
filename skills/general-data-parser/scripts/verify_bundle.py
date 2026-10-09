@@ -23,7 +23,7 @@ REMOTE_CHECKS = {"remote.bytes", "remote.index", "remote.query"}
 READY = {"local_ready", "local_ready_with_limitations", "published"}
 STATES = READY | {
     "prepared", "visual_review_required", "failed", "unsupported", "conflict",
-    "remote_unknown", "remote_incomplete", "invalidated",
+    "remote_unknown", "remote_incomplete", "invalidated", "ready_to_submit",
 }
 CONTROL = {"manifest.json", "acceptance.json"}
 SHA = re.compile(r"[0-9a-f]{64}\Z")
@@ -114,6 +114,89 @@ def file_digest(path):
     return hasher.hexdigest()
 
 
+def read_checks(report, ref):
+    checks = {}
+    for check in array(report.get("checks"), "checks"):
+        obj(check, "check")
+        cid = text(check.get("id"), "check id")
+        require(cid not in checks, f"duplicate check: {cid}")
+        require(type(check.get("executed")) is bool, "executed must be boolean")
+        result = check.get("result")
+        require(result in {"pass", "fail", "unknown", "skipped", "unsupported"}, "invalid check result")
+        evidence = strings(check.get("evidence"), "check evidence")
+        for name in evidence:
+            ref(name, {"receipt"})
+        if result == "pass":
+            require(check["executed"] and bool(evidence), "pass requires executed evidence")
+            text(check.get("method"), "check method")
+        else:
+            text(check.get("reason"), "nonpass reason")
+        checks[cid] = check
+    return checks
+
+
+def verify_backend_input(root, profile, manifest_raw, entries, identity, roles, files, ref, require_ready):
+    """A source-and-receipt package delegates actual parsing to the backend."""
+    text(profile.get("backend"), "backend")
+    require(obj(profile.get("roles"), "profile.roles") == {}, "backend parsing roles must be empty")
+    require(not TEXT_ROLES.intersection(roles), "backend parsing must not require local parsed documents")
+    for name, entry in files.items():
+        if entry["role"] not in {"source", "dependency"}:
+            require(PurePosixPath(name).name not in {
+                "facts.json", "observations.json", "asset.md", ".abstract.md", ".overview.md"
+            }, "native backend output must be stored as a receipt, not prefabricated")
+    owner = profile.get("summary_owner")
+    require(owner in {"none", "backend"}, "backend parsing cannot own local summaries")
+    if profile["backend"].casefold() in {"ov", "openviking"}:
+        require(owner == "backend", "OpenViking owns its generated summaries")
+    require("overview_relation" not in profile and "overview_rule" not in profile,
+            "local overview relation forbidden for backend parsing")
+    policy = profile.get("observation_policy")
+    require(policy in {"required", "optional", "not_applicable"}, "invalid observation policy")
+    required_list = strings(profile.get("required_checks"), "required_checks")
+    required = set(required_list)
+    require(len(required) == len(required_list) and {"input.integrity", "backend.capability"} <= required,
+            "backend parsing requires input and capability gates")
+    require(not (CORE_CHECKS | REMOTE_CHECKS | {"remote.parse", "remote.summaries", "observation.consistency"}) & required,
+            "backend content and publication checks belong after submission")
+    publication_list = strings(profile.get("publication_checks"), "publication_checks")
+    publication = set(publication_list)
+    require(len(publication) == len(publication_list), "duplicate publication checks")
+    report = strict_json(safe_path(root, "acceptance.json").read_bytes())
+    require(report.get("schema_version") == "general-parser.acceptance.v1", "acceptance schema mismatch")
+    require(all(report.get(key) == value for key, value in identity.items()), "object/version mismatch")
+    require(report.get("manifest_sha256") == digest(manifest_raw), "manifest binding mismatch")
+    profile_raw = safe_path(root, roles["profile"][0]).read_bytes()
+    require(report.get("profile_sha256") == digest(profile_raw), "profile binding mismatch")
+    require(report.get("source_manifest_sha256") == source_digest(entries), "source binding mismatch")
+    state = report.get("state")
+    require(state in STATES, "invalid acceptance state")
+    require(state not in {"local_ready", "local_ready_with_limitations"},
+            "backend input readiness is not local parsing completion")
+    strings(report.get("limitations"), "acceptance.limitations")
+    checks = read_checks(report, ref)
+    if state == "published":
+        needed = REMOTE_CHECKS | CORE_CHECKS | {"remote.parse"}
+        if owner == "backend":
+            needed.add("remote.summaries")
+        if policy == "required":
+            needed.add("observation.consistency")
+        require(needed <= publication, "backend publication lacks parsing/content/readback gates")
+        required |= publication
+    require(required <= set(checks), f"missing checks: {sorted(required - set(checks))}")
+    passed = all(checks[cid]["result"] == "pass" for cid in required)
+    if state in {"ready_to_submit", "published"}:
+        require(passed, "backend readiness has nonpassing required checks")
+    if require_ready:
+        require(state == "published" and passed, "backend parsing not yet completed and verified")
+    return {
+        "structural_validation": "pass", "recorded_required_checks_passed": passed,
+        "declared_state": state, "object_id": identity["object_id"], "version": identity["version"],
+        "files_verified": len(files), "profile": profile["id"], "parse_owner": "backend",
+        "summary_owner": owner, "semantic_validation": "not_performed_by_this_verifier",
+    }
+
+
 def verify(root, require_ready=False):
     root = Path(root).resolve()
     manifest_raw = safe_path(root, "manifest.json").read_bytes()
@@ -146,7 +229,7 @@ def verify(root, require_ready=False):
             actual.add(path.relative_to(root).as_posix())
     require(actual == set(files), f"unlisted/missing files: {sorted(actual ^ set(files))}")
     require(bool(roles.get("source")), "at least one source required")
-    for role in BASE_TEXT_ROLES | {"profile"}:
+    for role in {"profile"}:
         require(len(roles.get(role, [])) == 1, f"exactly one {role} file required")
 
     def read_role(role):
@@ -173,6 +256,16 @@ def verify(root, require_ready=False):
     adapter = obj(profile.get("adapter"), "adapter")
     text(adapter.get("tool"), "adapter.tool")
     text(adapter.get("version"), "adapter.version")
+    parse_owner = profile.get("parse_owner", "local")
+    require(parse_owner in {"local", "backend"}, "invalid parse owner")
+    if parse_owner == "backend":
+        return verify_backend_input(root, profile, manifest_raw, entries, identity, roles, files, ref, require_ready)
+    for role in BASE_TEXT_ROLES:
+        require(len(roles.get(role, [])) == 1, f"exactly one {role} file required")
+    if "parse_owner" in profile and profile.get("backend") in {"ov", "openviking"}:
+        require(profile.get("local_parse_reason") in {
+            "backend_unsupported", "backend_unavailable", "requested_additional_extraction", "user_requested_local"
+        }, "local parsing for OV requires an explicit scope or capability reason")
     # Profiles from 0.1.0 implicitly requested local summaries.
     owner = profile.get("summary_owner", "local")
     require(owner in {"none", "local", "backend"}, "invalid summary owner")
@@ -298,24 +391,9 @@ def verify(root, require_ready=False):
         require(read_role("asset") == read_role("overview"), "asset/overview bytes differ")
     state = report.get("state")
     require(state in STATES, "invalid acceptance state")
+    require(state != "ready_to_submit", "ready_to_submit belongs to backend parsing")
     limits = strings(report.get("limitations"), "acceptance.limitations")
-    checks = {}
-    for check in array(report.get("checks"), "checks"):
-        obj(check, "check")
-        cid = text(check.get("id"), "check id")
-        require(cid not in checks, f"duplicate check: {cid}")
-        require(type(check.get("executed")) is bool, "executed must be boolean")
-        result = check.get("result")
-        require(result in {"pass", "fail", "unknown", "skipped", "unsupported"}, "invalid check result")
-        evidence = strings(check.get("evidence"), "check evidence")
-        for name in evidence:
-            ref(name, {"receipt"})
-        if result == "pass":
-            require(check["executed"] and bool(evidence), "pass requires executed evidence")
-            text(check.get("method"), "check method")
-        else:
-            text(check.get("reason"), "nonpass reason")
-        checks[cid] = check
+    checks = read_checks(report, ref)
     if state == "published":
         require(REMOTE_CHECKS <= required | publication, "published profile lacks remote gates")
         if owner == "backend":
@@ -342,7 +420,7 @@ def verify(root, require_ready=False):
         "structural_validation": "pass", "recorded_required_checks_passed": passed,
         "declared_state": state, "object_id": identity["object_id"], "version": identity["version"],
         "files_verified": len(files), "profile": profile["id"],
-        "summary_owner": owner,
+        "summary_owner": owner, "parse_owner": "local",
         "semantic_validation": "not_performed_by_this_verifier",
     }
 

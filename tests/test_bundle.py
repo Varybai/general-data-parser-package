@@ -282,6 +282,126 @@ class BundleTests(unittest.TestCase):
         refresh(self.root)
         self.assertEqual(verifier.verify(self.root, True)["summary_owner"], "local")
 
+    def configure_backend_parsing(self):
+        profile = load(self.root, "profile.json")
+        for name in profile["roles"].values():
+            (self.root / name).unlink()
+        for path in (self.root / "receipts").iterdir():
+            path.unlink()
+        profile.update(parse_owner="backend", backend="openviking", summary_owner="backend", roles={},
+                       required_checks=["input.integrity", "backend.capability"],
+                       publication_checks=["remote.bytes", "remote.index", "remote.query",
+                                           "remote.parse", "remote.summaries", "content.fidelity",
+                                           "content.coverage", "document.consistency"])
+        profile.pop("overview_relation")
+        profile["adapter"] = {"tool": "OpenViking configured route", "version": "fixture"}
+        dump(self.root, "profile.json", profile)
+        dump(self.root, "receipts/native.json", {"test_only": True, "backend": "openviking"})
+        report = load(self.root, "acceptance.json")
+        report["state"] = "ready_to_submit"
+        report["checks"] = [{
+            "id": cid, "executed": True, "result": "pass", "method": "simulated backend preflight",
+            "evidence": ["receipts/native.json"], "reason": None
+        } for cid in profile["required_checks"]]
+        dump(self.root, "acceptance.json", report)
+        refresh(self.root)
+
+    def complete_backend_parsing(self, parse_result="pass"):
+        profile = load(self.root, "profile.json")
+        report = load(self.root, "acceptance.json")
+        report["state"] = "published"
+        for cid in profile["publication_checks"]:
+            result = parse_result if cid == "remote.parse" else "pass"
+            report["checks"].append({
+                "id": cid, "executed": result == "pass", "result": result,
+                "method": "simulated native parse and readback",
+                "evidence": ["receipts/native.json"] if result == "pass" else [],
+                "reason": None if result == "pass" else "parse task still pending"
+            })
+        dump(self.root, "acceptance.json", report)
+
+    def test_backend_parsing_accepts_source_and_receipts_only(self):
+        self.configure_backend_parsing()
+        result = verifier.verify(self.root)
+        self.assertEqual(result["parse_owner"], "backend")
+        self.assertEqual(result["declared_state"], "ready_to_submit")
+        self.assertFalse((self.root / "facts.json").exists())
+        self.assertFalse((self.root / "asset.md").exists())
+        self.rejects("not yet completed")
+
+    def test_backend_input_cannot_claim_local_parse_completed(self):
+        self.configure_backend_parsing()
+        report = load(self.root, "acceptance.json")
+        report["state"] = "local_ready"
+        dump(self.root, "acceptance.json", report)
+        self.rejects("not local parsing completion")
+
+    def test_backend_capability_failure_blocks_submission_ready(self):
+        self.configure_backend_parsing()
+        report = load(self.root, "acceptance.json")
+        report["checks"][1].update(result="unsupported", executed=False, evidence=[], reason="parser disabled")
+        dump(self.root, "acceptance.json", report)
+        self.rejects("nonpassing required")
+
+    def test_backend_parse_pending_blocks_published(self):
+        self.configure_backend_parsing()
+        self.complete_backend_parsing("unknown")
+        self.rejects("nonpassing required")
+
+    def test_backend_native_readback_can_complete_without_local_documents(self):
+        self.configure_backend_parsing()
+        self.complete_backend_parsing()
+        result = verifier.verify(self.root, True)
+        self.assertEqual(result["declared_state"], "published")
+        self.assertFalse((self.root / ".overview.md").exists())
+
+    def test_backend_publication_requires_content_checks(self):
+        self.configure_backend_parsing()
+        profile = load(self.root, "profile.json")
+        profile["publication_checks"].remove("content.coverage")
+        dump(self.root, "profile.json", profile)
+        refresh(self.root)
+        self.complete_backend_parsing()
+        self.rejects("parsing/content/readback gates")
+
+    def test_backend_rejects_local_parsed_artifact(self):
+        self.configure_backend_parsing()
+        profile = load(self.root, "profile.json")
+        profile["roles"]["asset"] = "asset.md"
+        dump(self.root, "profile.json", profile)
+        (self.root / "asset.md").write_text("duplicate locally parsed document")
+        refresh(self.root)
+        self.rejects("roles must be empty")
+
+    def test_backend_perception_checks_run_after_submission(self):
+        self.configure_backend_parsing()
+        profile = load(self.root, "profile.json")
+        profile["observation_policy"] = "required"
+        dump(self.root, "profile.json", profile)
+        refresh(self.root)
+        self.complete_backend_parsing()
+        self.rejects("parsing/content/readback gates")
+
+    def test_explicit_ov_local_parsing_requires_a_reason(self):
+        self.configure_external_summaries()
+        profile = load(self.root, "profile.json")
+        profile["parse_owner"] = "local"
+        dump(self.root, "profile.json", profile)
+        refresh(self.root)
+        self.rejects("scope or capability reason")
+        profile["local_parse_reason"] = "requested_additional_extraction"
+        dump(self.root, "profile.json", profile)
+        refresh(self.root)
+        self.assertTrue(verifier.verify(self.root, True)["recorded_required_checks_passed"])
+
+    def test_backend_quality_checks_are_not_input_preflight(self):
+        self.configure_backend_parsing()
+        profile = load(self.root, "profile.json")
+        profile["required_checks"].append("content.fidelity")
+        dump(self.root, "profile.json", profile)
+        refresh(self.root)
+        self.rejects("belong after submission")
+
 
 if __name__ == "__main__":
     unittest.main()

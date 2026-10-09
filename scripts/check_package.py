@@ -40,7 +40,7 @@ def check(root):
         for raw in re.findall(r"^```json\n(.*?)\n```", body, re.M | re.S):
             assert isinstance(json.loads(raw), dict)
             templates += 1
-    assert templates == 5, f"expected five envelope templates, found {templates}"
+    assert templates == 7, f"expected seven route/envelope templates, found {templates}"
     result = {"status": "pass", "payload_files": len(files), "resource_links": links, "json_templates": templates}
     print(json.dumps(result, indent=2))
     return result

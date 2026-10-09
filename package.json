@@ -1,6 +1,6 @@
 {
   "name": "general-data-parser-package",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Evidence-based parsing SOP, output contracts and acceptance checks for heterogeneous data; a portable Agent Skill and Pi package.",
   "keywords": [
     "pi-package",

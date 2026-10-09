@@ -1,0 +1,24 @@
+{
+  "version": "0.1.2",
+  "parse_modes": [
+    "backend",
+    "local"
+  ],
+  "backend_default": "submit original input through configured route",
+  "regression_tests_passed": 45,
+  "new_native_routing_tests": 10,
+  "skill_creator_validation": "pass",
+  "ruff_E9_F": "pass",
+  "json_templates": 7,
+  "remote_backend_calls": 0,
+  "source_review": {
+    "repository": "Varybai/Uni-Viking",
+    "commit": "4d394a0",
+    "modules": [
+      "PDFParser",
+      "AnyDocParser",
+      "ParserRouter"
+    ]
+  },
+  "scope": "Backend tests use simulated receipts; no live PDF/Office parsing or model request in this revision."
+}

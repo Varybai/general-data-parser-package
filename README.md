@@ -2,7 +2,7 @@
 
 一个仓库同时提供 **Pi coding agent package** 和标准 **Agent Skill**。两种安装方式使用同一份 `skills/general-data-parser/`。
 
-将异构数据解析组织为：确定契约、固定输入、提取事实、按需观察、生成文档、验收与可选发布。
+将异构数据解析组织为：确认后端能力、选择解析归属、保留原文件、执行现有解析路径、核验内容与证据。目标后端已支持的 PDF/Office 等直接提交原文件；额外适配只处理明确缺口或独立交付需求。
 
 ## 安装到 Pi
 
@@ -67,7 +67,9 @@ npx skills add Varybai/general-data-parser-package --list
 | 发布与失败恢复 | [publication.md](skills/general-data-parser/references/publication.md) |
 | 设计来源 | [design-origin.md](skills/general-data-parser/references/design-origin.md) |
 
-默认解析产物是 facts、observations、asset 三类文本，附原始源、profile、清单与验收回执。
+parse_owner=backend 时，原文件直接由 OV 等已配置的后端解析；Agent 记录输入哈希、路由、任务、资源 URI 和回读验收。无需先生成本地 facts/observations/asset。
+
+parse_owner=local 时，才按本地契约生成 facts、observations、asset，附源证据与回执。OV 目标下需记录本地处理的明确原因。
 
 | 摘要归属 | L0/L1 的生成者 |
 |---|---|
@@ -75,7 +77,7 @@ npx skills add Varybai/general-data-parser-package --list
 | local（用户要求独立摘要） | Agent 在本地生成并验收 |
 | backend（OV 入库） | OV 自动生成；Skill 等待、回读并验收 |
 
-OV 模式不预写或覆盖 .abstract.md/.overview.md。后端摘要未就绪时，本地解析可以通过，远端 published 状态须等待摘要和检索验收。保留源声明、计算事实、感知观察和推断的区别。
+OV 模式不预写或覆盖 .abstract.md/.overview.md。后端直入的输入通过检查后标为 ready_to_submit，解析与回读完成才 published。独立本地解析则保留 local_ready 阶段。保留源声明、计算事实、感知观察和推断的区别。
 
 Skill 提供操作方法和 Python 3.10+ 标准库只读验收器。实际解析依赖 Agent 环境中的格式库、应用或模型；安装本包不会安装这些后端、模型凭据或知识库服务。格式示例不是已测试支持矩阵。
 
@@ -94,4 +96,4 @@ npm run pack:skill
 
 `npm pack` 只包含共享 Skill、README 和 package manifest。测试、样本及维护脚本保留在 Git 仓库，不成为 npm 运行依赖。GitHub Actions 验证包结构、验收器回归、小样本转换与 npm 文件清单。
 
-[验证记录](https://github.com/Varybai/general-data-parser-package/blob/main/validation.md)区分 0.1.0 的初始验证与 0.1.1 的 35 项回归、小样本转换及安装验证。基础转换样本为 CSV、JSON、Markdown；其他格式按实际后端验证。
+[验证记录](https://github.com/Varybai/general-data-parser-package/blob/main/validation.md)区分历史安装/样本验证、0.1.1 的摘要归属修复与 0.1.2 的 45 项回归。基础转换样本为 CSV、JSON、Markdown；其他格式按实际后端验证。

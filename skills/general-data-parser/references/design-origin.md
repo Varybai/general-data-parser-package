@@ -11,12 +11,12 @@
 | 单张 PNG | 按任务选择图像、页面、音视频或其他证据，允许不适用 |
 | purpose_candidate | hypotheses；未知可为 null，用途始终未验证 |
 | part/model/connector 文档 | 三类解析文本；独立摘要按需启用 |
-| OpenViking 摘要 | 明确归后端生成，Skill 回读与验收 |
+| OpenViking 原生解析与摘要 | 已支持的输入直接交给后端，Skill 编排与验收 |
 | 原生源版本 | 源、配置、观察与规定正文的完整交付版本 |
 
 ## LDraw 适配建议
 
-使用现有原生解析结果、part/model 文档、`.source/manifest.json` 和 compiled-connectors 作为事实；使用真实几何闭包渲染图作为观察证据。映射字段时保留原产物。
+若当前 OV 已启用 LDraw 原生解析，直接提交原始 .dat/.ldr/.mpd 并回读；不在 Agent 端重复搭建解析链。需要独立本地输出或明确补充时，使用现有原生解析结果、part/model 文档、`.source/manifest.json` 和 compiled-connectors 作为事实；使用真实几何闭包渲染图作为观察证据。映射字段时保留原产物。
 
 model_generated 保留模型来源；真实看图证据充分时可记录 reviewed，随后仍需一致性检查。partial 必须满足必要字段/覆盖门槛。OV 的 L0/L1 由语义处理流程生成，适配时使用 backend 摘要模式并核对数字、来源和边界；custom 正文关系只适用于用户要求的独立 local 摘要。
 
