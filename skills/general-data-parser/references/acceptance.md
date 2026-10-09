@@ -9,9 +9,10 @@
 | content.fidelity | 用户要求的关键字段与源/API/独立计算一致 | 定位原文、记录预期/实际值和方法 |
 | content.coverage | 页/行/记录/对象/时间段覆盖满足范围 | 总量、处理量、遗漏、抽样方法 |
 | observation.consistency | required 时实际读取且内容不与可核验事实矛盾 | 证据读取回执、图像/片段与事实交叉核对 |
-| document.consistency | 正文数字/关系/单位/否定/未知与事实和观察一致 | 检查正文与链接；默认 asset/L1 同字节 |
-| 文件完整性 | 五类文本与必要证据存在，格式/哈希/路径正确 | verify_bundle.py |
+| document.consistency | 正文数字/关系/单位/否定/未知与事实和观察一致 | 检查解析正文与链接；仅 local 模式默认 asset/L1 同字节 |
+| 文件完整性 | 当前摘要归属要求的三类或五类文本及证据存在，格式/哈希/路径正确 | verify_bundle.py |
 | 远端交付 | 本次要求的字节、索引、查询与来源回读通过 | remote 检查与真实远端回执 |
+| remote.summaries | backend 模式的后端 L0/L1 已生成、可回读、非占位且与本次来源一致 | 保存实际 URI、时间、版本、正文与哈希，检查关键事实/边界及检索 |
 
 关键字段至少包含身份和用户关心的信息。覆盖必须有任务分母。模型在同一次生成中自称正确不是独立核验；使用源定位、其他计算路径或实际审阅。源不提供现实真值时，只能报告“与源一致”。质量阈值按任务约定，不虚构通用正确率。
 
@@ -28,7 +29,7 @@
 | remote_unknown / remote_incomplete | 写入结果未知 / 发布部分完成 |
 | invalidated | 旧检查因输入、配置、正文或远端变化失效 |
 
-必需项 fail/unknown/skipped/unsupported 均阻止就绪。partial 必须证明遗漏只影响约定可选范围，否则不通过。降级不得掩盖用户要求的失败项。
+本地 required_checks 的 fail/unknown/skipped/unsupported 阻止本地就绪。publication_checks 只在发布完成时成为必需门槛。OV 摘要尚未生成时，可报告 local_ready 和远端未完成，不能报告 published。partial 必须证明遗漏只影响约定可选范围，否则不通过。降级不得掩盖用户要求的失败项。
 
 ## 执行
 
@@ -51,7 +52,8 @@ python3 scripts/verify_bundle.py /path/to/bundle --require-ready
 | 正交对象被描述为平行 | 观察一致性失败，修正观察或保留失败 |
 | 摘要数字/否定与源不同 | 文档一致性失败 |
 | 同版正文或图片改变 | 发布冲突 |
-| 上传成功但查询不到或回读不同 | 不能 published |
+| 上传成功但查询不到、后端摘要未生成或回读不同 | 本地状态保留；不能 published |
+| OV 输入包预先放入 .abstract.md/.overview.md | 摘要职责冲突；停止发布到受管路径 |
 | 一批中某对象失败 | 逐对象状态；不得整批标记通过 |
 
 本表是验收规范，只有实际执行后才能记录为本次证据。

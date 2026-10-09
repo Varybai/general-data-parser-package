@@ -106,6 +106,7 @@ def make_bundle(root, kind="csv", reviewed=False):
         "roles": {"facts": "facts.json", "observations": "observations.json", "asset": "asset.md",
                   "abstract": ".abstract.md", "overview": ".overview.md"},
         "observation_policy": "required" if reviewed else "not_applicable",
+        "summary_owner": "local",
         "overview_relation": "identical", "required_checks": required,
     }
     if reviewed:

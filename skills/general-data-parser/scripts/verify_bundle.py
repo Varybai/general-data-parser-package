@@ -14,7 +14,9 @@ import re
 import sys
 
 
-TEXT_ROLES = {"facts", "observations", "asset", "abstract", "overview"}
+BASE_TEXT_ROLES = {"facts", "observations", "asset"}
+SUMMARY_ROLES = {"abstract", "overview"}
+TEXT_ROLES = BASE_TEXT_ROLES | SUMMARY_ROLES
 ROLES = TEXT_ROLES | {"profile", "source", "dependency", "evidence", "receipt"}
 CORE_CHECKS = {"content.fidelity", "content.coverage", "document.consistency"}
 REMOTE_CHECKS = {"remote.bytes", "remote.index", "remote.query"}
@@ -144,7 +146,7 @@ def verify(root, require_ready=False):
             actual.add(path.relative_to(root).as_posix())
     require(actual == set(files), f"unlisted/missing files: {sorted(actual ^ set(files))}")
     require(bool(roles.get("source")), "at least one source required")
-    for role in TEXT_ROLES | {"profile"}:
+    for role in BASE_TEXT_ROLES | {"profile"}:
         require(len(roles.get(role, [])) == 1, f"exactly one {role} file required")
 
     def read_role(role):
@@ -171,20 +173,44 @@ def verify(root, require_ready=False):
     adapter = obj(profile.get("adapter"), "adapter")
     text(adapter.get("tool"), "adapter.tool")
     text(adapter.get("version"), "adapter.version")
+    # Profiles from 0.1.0 implicitly requested local summaries.
+    owner = profile.get("summary_owner", "local")
+    require(owner in {"none", "local", "backend"}, "invalid summary owner")
+    backend = profile.get("backend")
+    if owner == "backend":
+        text(backend, "summary backend")
+    if isinstance(backend, str) and backend.casefold() in {"ov", "openviking"}:
+        require(owner == "backend", "OpenViking owns its generated summaries")
+    expected_roles = TEXT_ROLES if owner == "local" else BASE_TEXT_ROLES
+    for role in SUMMARY_ROLES:
+        expected_count = 1 if owner == "local" else 0
+        require(len(roles.get(role, [])) == expected_count, "summary files conflict with summary owner")
+    if owner != "local":
+        for name, entry in files.items():
+            if entry["role"] not in {"source", "dependency"}:
+                require(PurePosixPath(name).name not in {".abstract.md", ".overview.md"},
+                        "backend/unrequested summary must not be a local output")
     mapping = obj(profile.get("roles"), "profile.roles")
-    require(set(mapping) == TEXT_ROLES, "profile.roles must map five text roles")
-    require(all(mapping[role] == roles[role][0] for role in TEXT_ROLES), "role mapping mismatch")
+    require(set(mapping) == expected_roles, "profile.roles conflicts with summary owner")
+    require(all(mapping[role] == roles[role][0] for role in expected_roles), "role mapping mismatch")
     policy = profile.get("observation_policy")
     require(policy in {"required", "optional", "not_applicable"}, "invalid observation policy")
     relation = profile.get("overview_relation")
-    require(relation in {"identical", "custom"}, "invalid overview relation")
-    if relation == "custom":
-        text(profile.get("overview_rule"), "custom overview_rule")
+    if owner == "local":
+        require(relation in {"identical", "custom"}, "invalid overview relation")
+        if relation == "custom":
+            text(profile.get("overview_rule"), "custom overview_rule")
+    else:
+        require("overview_relation" not in profile and "overview_rule" not in profile,
+                "local overview relation forbidden for this summary owner")
     required_list = strings(profile.get("required_checks"), "required_checks")
     required = set(required_list)
     require(len(required) == len(required_list) and CORE_CHECKS <= required, "missing/duplicate core checks")
     if policy == "required":
         require("observation.consistency" in required, "required observation consistency check missing")
+    publication_list = strings(profile.get("publication_checks", []), "publication_checks")
+    publication = set(publication_list)
+    require(len(publication) == len(publication_list), "duplicate publication checks")
     profile_sha, source_sha = digest(profile_raw), source_digest(entries)
 
     def binding(value, schema):
@@ -266,7 +292,7 @@ def verify(root, require_ready=False):
             require(item.get("text") is None, "unknown hypothesis must be null")
             text(item.get("reason"), "hypothesis reason")
 
-    for role in ("asset", "abstract", "overview"):
+    for role in (("asset", "abstract", "overview") if owner == "local" else ("asset",)):
         text(read_role(role).decode("utf-8"), role)
     if relation == "identical":
         require(read_role("asset") == read_role("overview"), "asset/overview bytes differ")
@@ -291,11 +317,15 @@ def verify(root, require_ready=False):
             text(check.get("reason"), "nonpass reason")
         checks[cid] = check
     if state == "published":
-        require(REMOTE_CHECKS <= required, "published profile lacks remote gates")
+        require(REMOTE_CHECKS <= required | publication, "published profile lacks remote gates")
+        if owner == "backend":
+            require("remote.summaries" in required | publication, "published backend lacks summary readback gate")
+        required |= publication
     require(required <= set(checks), f"missing checks: {sorted(required - set(checks))}")
     passed = all(checks[cid]["result"] == "pass" for cid in required)
     optional_gap = policy == "optional" and review != "reviewed"
-    optional_gap |= any(c["result"] != "pass" for cid, c in checks.items() if cid not in required)
+    optional_gap |= any(c["result"] != "pass" for cid, c in checks.items()
+                        if cid not in required | publication)
     partial = extraction["status"] == "partial"
     if state in READY:
         require(passed, "ready state has nonpassing required checks")
@@ -312,6 +342,7 @@ def verify(root, require_ready=False):
         "structural_validation": "pass", "recorded_required_checks_passed": passed,
         "declared_state": state, "object_id": identity["object_id"], "version": identity["version"],
         "files_verified": len(files), "profile": profile["id"],
+        "summary_owner": owner,
         "semantic_validation": "not_performed_by_this_verifier",
     }
 

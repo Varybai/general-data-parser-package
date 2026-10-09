@@ -177,6 +177,111 @@ class BundleTests(unittest.TestCase):
         refresh(self.root)
         self.assertTrue(verifier.verify(self.root, True)["recorded_required_checks_passed"])
 
+    def configure_external_summaries(self, owner="backend"):
+        profile = load(self.root, "profile.json")
+        profile["summary_owner"] = owner
+        if owner == "backend":
+            profile["backend"] = "openviking"
+            profile["publication_checks"] = [
+                "remote.bytes", "remote.index", "remote.query", "remote.summaries"
+            ]
+        profile.pop("overview_relation")
+        for role in ("abstract", "overview"):
+            (self.root / profile["roles"].pop(role)).unlink()
+        dump(self.root, "profile.json", profile)
+        refresh(self.root)
+
+    def record_publication_checks(self, summary_result="pass"):
+        # Simulated receipts test gate semantics, not a live OpenViking service.
+        dump(self.root, "receipts/backend.json", {
+            "test_only": True, "abstract_uri": "viking://resources/fixture/.abstract.md",
+            "overview_uri": "viking://resources/fixture/.overview.md",
+            "readback": "simulated"
+        })
+        report = load(self.root, "acceptance.json")
+        for cid in load(self.root, "profile.json")["publication_checks"]:
+            result = summary_result if cid == "remote.summaries" else "pass"
+            report["checks"].append({
+                "id": cid, "executed": result == "pass", "result": result,
+                "method": "simulated backend contract check",
+                "evidence": ["receipts/backend.json"] if result == "pass" else [],
+                "reason": None if result == "pass" else "backend summaries still pending",
+            })
+        dump(self.root, "acceptance.json", report)
+        refresh(self.root)
+
+    def test_ordinary_parsing_needs_no_summaries(self):
+        self.configure_external_summaries("none")
+        result = verifier.verify(self.root, True)
+        self.assertEqual(result["summary_owner"], "none")
+        self.assertFalse((self.root / ".overview.md").exists())
+
+    def test_ov_local_ready_precedes_backend_generation(self):
+        self.configure_external_summaries()
+        self.assertTrue(verifier.verify(self.root, True)["recorded_required_checks_passed"])
+
+    def test_future_publication_checks_do_not_block_local_ready(self):
+        self.configure_external_summaries()
+        self.record_publication_checks("unknown")
+        self.assertTrue(verifier.verify(self.root, True)["recorded_required_checks_passed"])
+
+    def test_backend_owner_rejects_prefabricated_summary_role(self):
+        self.configure_external_summaries()
+        profile = load(self.root, "profile.json")
+        profile["roles"]["overview"] = ".overview.md"
+        dump(self.root, "profile.json", profile)
+        (self.root / ".overview.md").write_text("prefabricated")
+        refresh(self.root)
+        self.rejects("summary files conflict")
+
+    def test_backend_managed_filename_cannot_hide_as_receipt(self):
+        self.configure_external_summaries()
+        (self.root / ".abstract.md").write_text("prefabricated")
+        refresh(self.root)
+        self.rejects("must not be a local output")
+
+    def test_ov_owner_cannot_be_local(self):
+        profile = load(self.root, "profile.json")
+        profile["backend"] = "openviking"
+        dump(self.root, "profile.json", profile)
+        refresh(self.root)
+        self.rejects("OpenViking owns")
+
+    def test_backend_published_requires_summary_gate(self):
+        self.configure_external_summaries()
+        profile = load(self.root, "profile.json")
+        profile["publication_checks"].remove("remote.summaries")
+        dump(self.root, "profile.json", profile)
+        self.record_publication_checks()
+        report = load(self.root, "acceptance.json")
+        report["state"] = "published"
+        dump(self.root, "acceptance.json", report)
+        self.rejects("summary readback gate")
+
+    def test_backend_pending_summaries_block_published(self):
+        self.configure_external_summaries()
+        self.record_publication_checks("unknown")
+        report = load(self.root, "acceptance.json")
+        report["state"] = "published"
+        dump(self.root, "acceptance.json", report)
+        self.rejects("nonpassing required")
+
+    def test_backend_readback_can_complete_publication(self):
+        self.configure_external_summaries()
+        self.record_publication_checks()
+        report = load(self.root, "acceptance.json")
+        report["state"] = "published"
+        dump(self.root, "acceptance.json", report)
+        result = verifier.verify(self.root, True)
+        self.assertEqual(result["declared_state"], "published")
+
+    def test_legacy_010_local_profile_still_valid(self):
+        profile = load(self.root, "profile.json")
+        profile.pop("summary_owner")
+        dump(self.root, "profile.json", profile)
+        refresh(self.root)
+        self.assertEqual(verifier.verify(self.root, True)["summary_owner"], "local")
+
 
 if __name__ == "__main__":
     unittest.main()

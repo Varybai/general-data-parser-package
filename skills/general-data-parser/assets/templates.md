@@ -20,17 +20,18 @@
   "roles": {
     "facts": "facts.json",
     "observations": "observations.json",
-    "asset": "asset.md",
-    "abstract": ".abstract.md",
-    "overview": ".overview.md"
+    "asset": "asset.md"
   },
   "observation_policy": "REPLACE_POLICY",
-  "overview_relation": "identical",
+  "summary_owner": "none",
+  "publication_checks": [],
   "required_checks": ["content.fidelity", "content.coverage", "document.consistency"]
 }
 ```
 
-把本次格式专项加入 required_checks；required 观察增加 observation.consistency。发布时增加三个 remote 检查。根据源记录单位、坐标、时区、编码及实际依赖，不擅设未知单位。
+把本次格式专项加入 required_checks；required 观察增加 observation.consistency。发布检查单独放入 publication_checks，至少有 remote.bytes、remote.index、remote.query。
+
+OV 入库将 summary_owner 改为 backend，增加 backend=openviking，并在 publication_checks 增加 remote.summaries；roles 保持上面的三类。只有用户要求独立本地摘要时才改为 local，在 roles 增加 abstract/overview 两项，并设置 overview_relation=identical。根据源记录单位、坐标、时区、编码及实际依赖，不擅设未知单位。
 
 ## facts.json
 
@@ -84,9 +85,9 @@ known/partial 字段的 basis 使用 `{ "path": "source/input.csv", "locator": {
 
 实际观察后写 observer.kind/id/receipt、带时区时间、items 和定位。not_applicable 使用 skipped 与实际理由。无用途推断无需造一个候选。观察条目示例结构为 id/kind/text/basis/limitations；假设为 id/text/status/based_on/reason。
 
-## asset.md 与 .overview.md
+## asset.md
 
-默认一次生成后复制同字节；按用户 schema 可调整。
+下面是解析说明模板。仅 local 摘要模式把它复制为 .overview.md；OV/backend 模式由后端生成自己的摘要，不使用此复制规则。
 
 ```markdown
 # {对象身份与源标题}
@@ -113,7 +114,7 @@ known/partial 字段的 basis 使用 `{ "path": "source/input.csv", "locator": {
 {损失、抽样、未支持内容，以及哪些变化会使验收失效}
 ```
 
-.abstract.md 从同版正文提炼；不能为缩短而删除必要的否定、单位、未知和推断未验证标记。
+仅 local 模式生成 .abstract.md，保留必要的否定、单位、未知和推断未验证标记。backend 模式在发布后读取后端 L0/L1，把实际 URI、版本、正文/哈希和检查保存到回执，remote.summaries 通过后才可声明 published。
 
 ## manifest.json
 
@@ -153,4 +154,4 @@ files 要枚举全部产物，排除 manifest.json 和 acceptance.json。上面�
 }
 ```
 
-检查真实执行后才写 executed=true 和 pass，附方法和清单内回执。profile 增加的每个检查也要有记录。未知/失败不能通过改 state 升级为成功。
+检查真实执行后才写 executed=true 和 pass，附方法和清单内回执。profile 增加的每个本地检查也要有记录；publication_checks 在发布阶段补记录，不能阻塞尚未发布的本地就绪状态。未知/失败不能通过改 state 升级为成功。

@@ -1,0 +1,16 @@
+{
+  "version": "0.1.1",
+  "summary_modes": [
+    "none",
+    "local",
+    "backend"
+  ],
+  "openviking_summary_owner": "backend",
+  "regression_tests_passed": 35,
+  "new_ownership_and_gate_tests": 10,
+  "skill_creator_validation": "pass",
+  "ruff_E9_F": "pass",
+  "npm_payload_files": 12,
+  "remote_backend_calls": 0,
+  "scope": "Contract and state-gate tests use simulated backend receipts; no live OpenViking call."
+}

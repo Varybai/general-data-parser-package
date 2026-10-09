@@ -67,7 +67,15 @@ npx skills add Varybai/general-data-parser-package --list
 | 发布与失败恢复 | [publication.md](skills/general-data-parser/references/publication.md) |
 | 设计来源 | [design-origin.md](skills/general-data-parser/references/design-origin.md) |
 
-默认产物是 facts、observations、asset、L0、L1 五类文本，附实际源文件、profile、清单和验收回执。保留源声明、计算事实、感知观察和推断的区别。
+默认解析产物是 facts、observations、asset 三类文本，附原始源、profile、清单与验收回执。
+
+| 摘要归属 | L0/L1 的生成者 |
+|---|---|
+| none（普通解析） | 不要求独立 L0/L1 |
+| local（用户要求独立摘要） | Agent 在本地生成并验收 |
+| backend（OV 入库） | OV 自动生成；Skill 等待、回读并验收 |
+
+OV 模式不预写或覆盖 .abstract.md/.overview.md。后端摘要未就绪时，本地解析可以通过，远端 published 状态须等待摘要和检索验收。保留源声明、计算事实、感知观察和推断的区别。
 
 Skill 提供操作方法和 Python 3.10+ 标准库只读验收器。实际解析依赖 Agent 环境中的格式库、应用或模型；安装本包不会安装这些后端、模型凭据或知识库服务。格式示例不是已测试支持矩阵。
 
@@ -86,4 +94,4 @@ npm run pack:skill
 
 `npm pack` 只包含共享 Skill、README 和 package manifest。测试、样本及维护脚本保留在 Git 仓库，不成为 npm 运行依赖。GitHub Actions 验证包结构、验收器回归、小样本转换与 npm 文件清单。
 
-[验证记录](https://github.com/Varybai/general-data-parser-package/blob/main/validation.md)区分原有 25 项测试、小样本转换和安装验证。基础转换样本为 CSV、JSON、Markdown；其他格式按实际后端验证。
+[验证记录](https://github.com/Varybai/general-data-parser-package/blob/main/validation.md)区分 0.1.0 的初始验证与 0.1.1 的 35 项回归、小样本转换及安装验证。基础转换样本为 CSV、JSON、Markdown；其他格式按实际后端验证。

@@ -15,7 +15,8 @@ def main():
     check(skill)
     target = package / "dist"
     target.mkdir(exist_ok=True)
-    archive = target / "general-data-parser-0.1.0.zip"
+    version = json.loads((package / "package.json").read_text())["version"]
+    archive = target / f"general-data-parser-{version}.zip"
     paths = sorted(path for path in skill.rglob("*") if path.is_file())
     with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as output:
         for path in paths:
